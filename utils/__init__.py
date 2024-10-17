@@ -1,3 +1,3 @@
-from .indeedScraper import IndeedScraper
+from .indeed_scraper import IndeedScraper
 from .db import DataBase
-from .searchAPI import SearchAPI
+from .search_api import SearchAPI

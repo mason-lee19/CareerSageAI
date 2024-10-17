@@ -8,6 +8,6 @@ class SearchAPI():
         return session
 
     def get_session(self):
-        return cureq.Session(impersonate="chrome",
-                             proxy=os.getenv("stickyproxy"))
+        """Helper function to return curl_cffi session"""
+        return cureq.Session(impersonate="chrome", proxy=os.getenv("stickyproxy"))
         
