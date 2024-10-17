@@ -3,12 +3,11 @@ import pandas as pd
 from curl_cffi import requests as cureq
 import time
 
-def scrape_indeed( job_title:str,location:str,pages:int):
+def scrape_indeed(job_title:str,location:str,pages:int):
     """
     Iterates through indeed job board based on job title, location  and pulls relevent information to push to db file.
 
         Args:
-            session (cureq.Session): curl_cffi request session
             job_title (str): The job title to search for.
             location (str): The location to search in.
             start_num (int): The pagination start number for results.
