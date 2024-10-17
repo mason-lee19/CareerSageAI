@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from typing import List
 from bs4 import BeautifulSoup
 import re
+import os
+import traceback
 
 from .string_util import StringUtil
 
@@ -36,6 +38,7 @@ class IndeedScraper:
             JobListing: A JobListing object populated with the fetched job details.
         """
         try:
+            print(f'Pulling Indeed Job Information for: {job_title} - {location} - page: {round(start_num/10,0)}')
             # Construct the search URL
             url = self._build_url(job_title, location, start_num)
             
@@ -50,9 +53,10 @@ class IndeedScraper:
 
         except Exception as e:
             print(f"Error fetching job listings: {e}")
+            traceback.print_exc()
             return None
 
-    def pull_job_details(resp):
+    def pull_job_details(self,resp):
         """
         Fetches job details from Indeed mosaic view
 
@@ -76,13 +80,13 @@ class IndeedScraper:
                 if not a:
                     continue
 
-                job_link = StringUtil.get_indeed_url(a.get('href'))
+                job_link = self._get_indeed_url(a.get('href'))
 
                 job_list['jobLink'].append(job_link)
 
                 job_salary,job_description = self.pull_job_desc(job_link)
     
-                min_salary, max_salary = StringUtil.extract_salary(job_salary)
+                min_salary, max_salary = self._get_clean_salary(job_salary)
 
                 job_list['minSalary'].append(min_salary)
                 job_list['maxSalary'].append(max_salary)
@@ -115,16 +119,16 @@ class IndeedScraper:
         if 'text/html' in resp.headers['Content-Type'] and resp.status_code == 200:
 
             soup = BeautifulSoup(resp.text,'html.parser')
-            job_container = soup.find('div', class_=re.compile(r'^fastviewjob'))
+            job_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
 
             if not job_container:
                 return 'Not Specified', 'None'
             
             # Extract salary info
-            salary = self.extract_salary(job_container)
+            salary = self._extract_salary(job_container)
 
             # Extract job description
-            description = self.extract_description(job_container)
+            description = self._extract_description(job_container)
             
         return salary,description
     
@@ -140,35 +144,33 @@ class IndeedScraper:
         Returns:
             str: The formatted search URL.
         """
-        formatted_job_title = self.format_search(job_title)
-        formatted_location = self.format_search(location)
+        formatted_job_title = StringUtil.format_search(job_title)
+        formatted_location = StringUtil.format_search(location)
 
-        return f"https://www.indeed.com/jobs?q={formatted_job_title}&l={formatted_location},+CA&start={start_num}"
+        return f"https://www.indeed.com/jobs?q={formatted_job_title}&l={formatted_location},+CA&start={str(start_num)}"
+
+    @staticmethod
+    def _get_indeed_url(href):
+        """Helper function to build full Indeed link from href"""
+        return 'https://www.indeed.com' + href
+
+    @staticmethod
+    def _get_clean_salary(job_salary):
+        """Helper function to split and clean salary into min and max."""
+        if job_salary != 'Not Specified' and len(job_salary.split(' ')) > 2:
+            min_salary = job_salary.split('-')[0].replace('$', '').strip()
+            max_salary = job_salary.split('-')[1].split(' ')[1].replace('$', '').strip()
+            return min_salary, max_salary
+        return 'None', 'None'
     
     @staticmethod
-    def extract_salary(container: BeautifulSoup) -> str:
-        """
-        Extracts the salary information from the job container.
-
-        Args:
-            container (BeautifulSoup): The outermost container with job details.
-
-        Returns:
-            str: The extracted salary or 'Not Specified' if not found.
-        """
-        raw_salary = container.find('div', attrs={'id': 'salaryInfoAndJobType'})
-        return raw_salary.get_text().strip() if raw_salary else 'Not Specified'
+    def _extract_salary(container: BeautifulSoup) -> str:
+        """Helper function to extract the salary information from the job container."""
+        raw_salary = container.find('div',attrs={'id':'salaryInfoAndJobType'})
+        return raw_salary.get_text() if raw_salary else 'Not Specified'
 
     @staticmethod
-    def extract_description(container: BeautifulSoup) -> str:
-        """
-        Extracts the job description from the job container.
-
-        Args:
-            container (BeautifulSoup): The outermost container with job details.
-
-        Returns:
-            str: The cleaned job description or 'None' if not found.
-        """
-        raw_description = container.find('div', attrs={'id': 'jobDescriptionText'})
-        return raw_description.get_text().replace('\n', '').strip() if raw_description else 'None'
+    def _extract_description(container: BeautifulSoup) -> str:
+        """Helper function to extract the job description from the job container."""
+        raw_description = container.find('div', attrs={'id':'jobDescriptionText'})
+        return raw_description.get_text().replace('\n', '') if raw_description else 'None'
