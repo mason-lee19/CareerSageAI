@@ -4,6 +4,7 @@ from typing import List
 from bs4 import BeautifulSoup
 import re
 import os
+import time
 import traceback
 
 from .string_util import StringUtil
@@ -38,22 +39,26 @@ class IndeedScraper:
             JobListing: A JobListing object populated with the fetched job details.
         """
         try:
-            print(f'Pulling Indeed Job Information for: {job_title} - {location} - page: {round(start_num/10,0)}')
+            print(f'Pulling Indeed Job Information for: {job_title} - {location} - page: {int(start_num//10)}')
             # Construct the search URL
             url = self._build_url(job_title, location, start_num)
             
             # Send the GET request
             response = self.session.get(url, headers=HEADERS)
 
-            # Raise an error for bad HTTP responses
-            response.raise_for_status()
+            if response.status_code != 200:
+                # Raise an error for bad HTTP responses
+                response.raise_for_status()
+                return response.status_code
 
             # Pull job details and return as JobListing object
             return JobListing(**self.pull_job_details(response))
 
         except Exception as e:
-            print(f"Error fetching job listings: {e}")
+            print(f"[Indeed Scraper] Error fetching job listings: {e}")
+            print('-'*20)
             traceback.print_exc()
+            print('-'*20)
             return None
 
     def pull_job_details(self,resp):
@@ -114,23 +119,42 @@ class IndeedScraper:
         Returns:
             tuple: A tuple containing salary (str) and description (str).
         """
-        resp = cureq.get(job_link,impersonate='chrome')
+        resp = self.session.get(job_link,impersonate='chrome')
 
-        if 'text/html' in resp.headers['Content-Type'] and resp.status_code == 200:
+        if resp.status_code != 200:
+            print(f'Something went wrong with job link : {job_link}')
+            print(f'Waiting 10 seconds and trying again')
+            time.sleep(10)
+            resp = self.session.get(job_link,impersonate='chrome')
 
-            soup = BeautifulSoup(resp.text,'html.parser')
-            job_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
+        salary = 'Not Specified'
+        description = 'None'
 
-            if not job_container:
-                return 'Not Specified', 'None'
+        try:
+
+            if 'text/html' in resp.headers['Content-Type'] and resp.status_code == 200:
+
+                soup = BeautifulSoup(resp.text,'html.parser')
+                job_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
+
+                if not job_container:
+                    return 'Not Specified', 'None'
+                
+                # Extract salary info
+                salary = self._extract_salary(job_container)
+
+                # Extract job description
+                description = self._extract_description(job_container)
+                
+            return salary,description
+        
+        except Exception as e:
+            print(f'Job Link : {job_link}')
+            print(f'Salary : {salary}')
+            print(f'Desc : {description}')
+            print(f'Something went wrong: {e}')
             
-            # Extract salary info
-            salary = self._extract_salary(job_container)
-
-            # Extract job description
-            description = self._extract_description(job_container)
-            
-        return salary,description
+        return 'Not Specified', 'None'
     
     def _build_url(self, job_title: str, location: str, start_num: int) -> str:
         """
