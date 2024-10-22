@@ -39,7 +39,7 @@ class IndeedScraper:
             JobListing: A JobListing object populated with the fetched job details.
         """
         try:
-            print(f'Pulling Indeed Job Information for: {job_title} - {location} - page: {int(start_num//10)}')
+            print(f'[Indeed Scraper] Pulling Indeed Job Information for: {job_title} - {location} - page: {int(start_num//10)}')
             # Construct the search URL
             url = self._build_url(job_title, location, start_num)
             
@@ -122,8 +122,8 @@ class IndeedScraper:
         resp = self.session.get(job_link,impersonate='chrome')
 
         if resp.status_code != 200:
-            print(f'Something went wrong with job link : {job_link}')
-            print(f'Waiting 10 seconds and trying again')
+            print(f'[Indeed Scraper] Something went wrong with job link : {job_link}')
+            print(f'[Indeed Scraper] Waiting 10 seconds and trying again')
             time.sleep(10)
             resp = self.session.get(job_link,impersonate='chrome')
 

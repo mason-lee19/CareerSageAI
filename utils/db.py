@@ -1,10 +1,9 @@
 from pydantic import BaseModel
 import sqlite3
 import hashlib
-import datetime
+from datetime import datetime
 
 class DataBaseSQLConfig(BaseModel):
-    bucket_name:str
     db_file:str
     table_name:str
     local_db_path:str
@@ -16,6 +15,7 @@ class DataBase():
         Args:
             config (DataBaseSqlConfig): Sql file configuration details
         """
+        print('[DB] Initializing db handler')
         self.config = config
 
         self.conn = sqlite3.connect(config.local_db_path)
@@ -34,9 +34,8 @@ class DataBase():
                 maxSalary TEXT,
                 jobDetails TEXT,
                 jobLocation TEXT,
-                pullDate TEXT,
-            )    
-
+                pullDate TEXT
+            )
         ''')
 
         self.conn.commit()
@@ -49,7 +48,14 @@ class DataBase():
         Returns:
             str: A unique job key identifier
         """
-        return hashlib.md5(job_link.encode()).hexdigest()
+        job_bytes = job_link.encode('utf-8')
+
+        sha256_hash = hashlib.sha256()
+        sha256_hash.update(job_bytes)
+
+        unique_key = sha256_hash.hexdigest()
+
+        return unique_key
     
     def job_exists(self,job_key: str,) -> bool:
         """
@@ -68,24 +74,27 @@ class DataBase():
         Args:
             job_data (JobListing): Job data.
         """
-        job_key = self.generate_job_key(job_data.jobLink)
-        if not self.job_exists(job_key):
-            pull_date = datetime.now().strftime('%Y-%m-$d')
-            self.cursor.execute(f'''
-                INSERT INTO {self.config.table_name} (jobKey, jobLink, jobTitle, jobCompany, minSalary, maxSalary, jobDetails, jobLocation, pullDate)
-                VALUES (? ? ? ? ? ? ? ? ?)
-            ''',(job_key,job_data.jobLink,job_data.jobTitle,job_data.jobCompany,
-                 job_data.minSalary,job_data.maxSalary,job_data.jobDetails,
-                 job_data.jobLocation,pull_date))
-            
-            self.conn.commit()
+        print('[DB] Inserting listing data to db table')
+        for idx in range(len(job_data.jobLink)):
+            job_key = self.generate_job_key(job_data.jobLink[idx])
+            if not self.job_exists(job_key):
+                pull_date = datetime.now().strftime('%Y-%m-$d')
+                self.cursor.execute(f'''
+                    INSERT INTO {self.config.table_name} (jobKey, jobLink, jobTitle, jobCompany, minSalary, maxSalary, jobDetails, jobLocation, pullDate)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''',(job_key, job_data.jobLink[idx], job_data.jobTitle[idx] ,job_data.jobCompany[idx],
+                    job_data.minSalary[idx], job_data.maxSalary[idx], job_data.jobDetails[idx],
+                    job_data.jobLocation[idx], pull_date))
+                
+                self.conn.commit()
 
-        else:
-            print(f'Job {job_data.jobTitle} already exists in the database')
+            else:
+                print(f'[DB] Job {job_data.jobTitle} already exists in the database')
 
 
     def close(self):
         """Close database connection."""
+        print('[DB] Closing db connection')
         self.conn.close()
 
     
