@@ -78,7 +78,7 @@ class DataBase():
         for idx in range(len(job_data.jobLink)):
             job_key = self.generate_job_key(job_data.jobLink[idx])
             if not self.job_exists(job_key):
-                pull_date = datetime.now().strftime('%Y-%m-$d')
+                pull_date = datetime.now().strftime('%Y-%m-%d')
                 self.cursor.execute(f'''
                     INSERT INTO {self.config.table_name} (jobKey, jobLink, jobTitle, jobCompany, minSalary, maxSalary, jobDetails, jobLocation, pullDate)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
