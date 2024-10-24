@@ -47,7 +47,7 @@ if __name__ == "__main__":
     dbHandler.create_table()
 
     print('[MAIN] Scraping Indeed')
-    indeed_info = scrape_indeed('data engineer','mountain view',10,dbHandler)
+    indeed_info = scrape_indeed('data scientist','mountain view',10,dbHandler)
     #indeed_info.to_excel('test.xlsx')
     print('[MAIN] Done Scraping Indeed')
 
