@@ -1,0 +1,114 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
+  <diagram name="Page-1" id="ULFokGEJozErFgEVEcbF">
+    <mxGraphModel dx="1008" dy="703" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gN4T2GxhsMMItLLlWENc-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-1" target="gN4T2GxhsMMItLLlWENc-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-1" value="User input query&lt;div&gt;(job_title: List[str], loc: str)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="30" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-2" target="gN4T2GxhsMMItLLlWENc-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-2" value="Indeed" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-3" target="gN4T2GxhsMMItLLlWENc-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-3" target="gN4T2GxhsMMItLLlWENc-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-3" target="gN4T2GxhsMMItLLlWENc-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-3" value="Scrape Job Sites" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="250" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="219.82608695652175" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-5" value="Google Jobs" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="320" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="220" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-6" value="others" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="320" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-10" target="gN4T2GxhsMMItLLlWENc-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-10" value="Query db&lt;div&gt;(query:str, date_pull: timestamp (%y-%m-%d&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="60" y="95" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-11" target="gN4T2GxhsMMItLLlWENc-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-11" target="gN4T2GxhsMMItLLlWENc-23">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="230" />
+              <mxPoint x="560" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-11" value="Check if query in db / up to date" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-15" value="No" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-17" value="Job Data" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="250" y="520" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-18" target="gN4T2GxhsMMItLLlWENc-23">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="440" />
+              <mxPoint x="440" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-18" value="Push to db" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="175" y="420" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-18" target="gN4T2GxhsMMItLLlWENc-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-23" target="gN4T2GxhsMMItLLlWENc-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-23" value="Query relevant query data" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-26" value="Yes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="220" width="35" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-18" target="gN4T2GxhsMMItLLlWENc-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-33" value="Return top jobs based on user resume" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-35" target="gN4T2GxhsMMItLLlWENc-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-35" value="Vectorized Job Db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="520" y="525" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="gN4T2GxhsMMItLLlWENc-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="gN4T2GxhsMMItLLlWENc-17" target="gN4T2GxhsMMItLLlWENc-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
