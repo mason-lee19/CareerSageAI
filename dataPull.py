@@ -22,17 +22,27 @@ def scrape_indeed(job_title:str,location:str,pages:int,dbHanlder):
     # Figure out how many pages we want or pull max pages instead of manually adding pages
     ###
     cur_page = 0
+    max_retries = 2
+    consecutive_errors = 0
+
     while cur_page <= pages:
         listing = indeed_scraper.get_search(job_title,location,cur_page*10)
         # Instead of concat update to push to db file
         if isinstance(listing,JobListing):
             dbHanlder.add_job(listing)
+            consecutive_errors = 0
             #df = pd.concat([df,pd.DataFrame(listing.dict())],ignore_index=True)
             cur_page += 1
-        else:
+        elif max_retries > 0:
             print(f'[MAIN] Something went wrong with page : {cur_page}')
             print('[MAIN] Waiting 10 seconds and trying again')
+            max_retries -= 1
             time.sleep(10)
+        elif consecutive_errors == 1:
+            break
+        else:
+            max_retries = 2
+            consecutive_errors +=1 
 
     return df
 
@@ -47,7 +57,7 @@ if __name__ == "__main__":
     dbHandler.create_table()
 
     print('[MAIN] Scraping Indeed')
-    indeed_info = scrape_indeed('data scientist','mountain view',10,dbHandler)
+    indeed_info = scrape_indeed('software engineer','mountain view',10,dbHandler)
     #indeed_info.to_excel('test.xlsx')
     print('[MAIN] Done Scraping Indeed')
 

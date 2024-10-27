@@ -87,6 +87,10 @@ class IndeedScraper:
 
                 job_link = self._get_indeed_url(a.get('href'))
 
+                # Check if job link is an ad
+                if 'rc' not in set(job_link.split('/')):
+                    continue
+
                 job_list['jobLink'].append(job_link)
 
                 job_salary,job_description = self.pull_job_desc(job_link)
@@ -171,7 +175,7 @@ class IndeedScraper:
         formatted_job_title = StringUtil.format_search(job_title)
         formatted_location = StringUtil.format_search(location)
 
-        return f"https://www.indeed.com/jobs?q={formatted_job_title}&l={formatted_location},+CA&start={str(start_num)}"
+        return f"https://www.indeed.com/jobs?q={formatted_job_title}&l={formatted_location}+CA&start={str(start_num)}"
 
     @staticmethod
     def _get_indeed_url(href):
