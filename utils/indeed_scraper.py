@@ -8,6 +8,7 @@ import time
 import traceback
 
 from .string_util import StringUtil
+from .logger_config import logger
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
@@ -40,25 +41,27 @@ class IndeedScraper:
         """
         try:
             print(f'[Indeed Scraper] Pulling Indeed Job Information for: {job_title} - {location} - page: {int(start_num//10)}')
+            
             # Construct the search URL
             url = self._build_url(job_title, location, start_num)
+            logger.info(f'[Indeed Scraper] Pulling Indeed Job Information for: {job_title} - {location} - page: {int(start_num//10)}')
+            logger.info(f'url: {url}')
             
             # Send the GET request
             response = self.session.get(url, headers=HEADERS)
 
             if response.status_code != 200:
                 # Raise an error for bad HTTP responses
-                response.raise_for_status()
+                logger.error(f'[Indeed Scraper] bad HTTP response: {response.raise_for_status()}')
+                #response.raise_for_status()
                 return response.status_code
 
             # Pull job details and return as JobListing object
             return JobListing(**self.pull_job_details(response))
 
         except Exception as e:
+            logger.info(f'[Indeed Scraper] Error fetching job listings {e}')
             print(f"[Indeed Scraper] Error fetching job listings: {e}")
-            print('-'*20)
-            traceback.print_exc()
-            print('-'*20)
             return None
 
     def pull_job_details(self,resp):
@@ -89,6 +92,7 @@ class IndeedScraper:
 
                 # Check if job link is an ad
                 if 'rc' not in set(job_link.split('/')):
+                    logger.error(f'Bad url found skipping: {job_link}')
                     continue
 
                 job_list['jobLink'].append(job_link)
@@ -126,7 +130,8 @@ class IndeedScraper:
         resp = self.session.get(job_link,impersonate='chrome')
 
         if resp.status_code != 200:
-            print(f'[Indeed Scraper] Something went wrong with job link : {job_link}')
+            logger.error(f'[Indeed Scraper] Error with individual job link : {job_link}')
+            print(f'[Indeed Scraper] Something went wrong with individual job link')
             print(f'[Indeed Scraper] Waiting 10 seconds and trying again')
             time.sleep(10)
             resp = self.session.get(job_link,impersonate='chrome')
@@ -153,10 +158,13 @@ class IndeedScraper:
             return salary,description
         
         except Exception as e:
-            print(f'Job Link : {job_link}')
-            print(f'Salary : {salary}')
-            print(f'Desc : {description}')
-            print(f'Something went wrong: {e}')
+            print('[Indeed Scraper] Error getting salary and job description')
+            logger.error(f'''
+                         [Indeed Scraper] Error getting salary and job description\n
+                         Job Link : {job_link}\n
+                         Salary : {salary}\n
+                         Desc : {description}\n
+                         Error : {e}''')
             
         return 'Not Specified', 'None'
     
