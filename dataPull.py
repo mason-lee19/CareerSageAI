@@ -1,7 +1,6 @@
 from utils import DataBase, DataBaseSQLConfig, IndeedScraper, SearchAPI, JobListing
 from utils.logger_config import logger
 import pandas as pd
-from curl_cffi import requests as cureq
 import time
 
 def scrape_indeed(job_title:str,location:str,pages:int,dbHanlder):
@@ -62,7 +61,7 @@ if __name__ == "__main__":
     dbHandler.create_table()
 
     print('[MAIN] Scraping Indeed')
-    indeed_info = scrape_indeed('software engineer','mountain view',2,dbHandler)
+    indeed_info = scrape_indeed('data scientist','mountain view',2,dbHandler)
     #indeed_info.to_excel('test.xlsx')
     print('[MAIN] Done Scraping Indeed')
 

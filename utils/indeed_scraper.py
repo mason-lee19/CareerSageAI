@@ -22,6 +22,7 @@ class JobListing(BaseModel):
     maxSalary: List[str]
     jobDetails: List[str]
     jobLocation: List[str]
+    expirationStatus: List[bool]
 
 class IndeedScraper:
     def __init__(self, session: cureq.Session):
@@ -76,7 +77,7 @@ class IndeedScraper:
         """
         job_list = {'jobLink':[],'jobTitle':[],
                     'jobCompany':[],'minSalary':[],
-                    'maxSalary':[],'jobDetails':[],'jobLocation':[]}
+                    'maxSalary':[],'jobDetails':[],'jobLocation':[],'expirationStatus':[]}
 
         if 'text/html' in resp.headers['Content-Type'] and resp.status_code == 200:
             soup = BeautifulSoup(resp.text, 'html.parser')
@@ -113,6 +114,10 @@ class IndeedScraper:
                 )
                 job_list['jobLocation'].append(
                     StringUtil.extract_text(job.find('div', {'data-testid': 'text-location'}))
+                )
+
+                job_list['expirationStatus'].append(
+                    self._check_expired_job(job_link)
                 )
 
         return job_list
@@ -184,6 +189,24 @@ class IndeedScraper:
         formatted_location = StringUtil.format_search(location)
 
         return f"https://www.indeed.com/jobs?q={formatted_job_title}&l={formatted_location}+CA&start={str(start_num)}"
+    
+    def _check_expired_job(self,job_url:str) -> bool:
+        """Search for any div with relevant text indicating expiration"""
+        response = self.session.get(job_url,impersonate='chrome')
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # Search for any div with relevant text indicating expiration
+            expired_message = soup.find(lambda tag: tag.name == "div" and 
+                                        "This job has expired on Indeed" in tag.get_text())
+            
+            if expired_message:
+                logger.info(f'Job has expired : {job_url}')
+                return True
+            return False
+        else:
+            logger.error(f'Unable to retrieve individual job url : {job_url}')
+            return False
 
     @staticmethod
     def _get_indeed_url(href):
