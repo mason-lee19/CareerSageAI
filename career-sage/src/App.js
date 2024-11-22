@@ -1,48 +1,18 @@
-import React from "react";
+import React, { Component } from "react";
+import Navbar from "./components/navbar.js"
+import Footer from "./components/footer.js"
+import "./static/style.css";
 
-/* Don't forget to download the CSS file too 
-OR remove the following line if you're already using Tailwind */
-
-import ".static/style.css";
-
-export const MyPlugin = () => {
+function App(){
   return (
     <div id="webcrumbs">
-      <div className="w-[1200px] min-h-[800px] bg-neutral-50 shadow-lg rounded-lg">
+      <div className="w-full min-h-screen bg-neutral-50 shadow-lg rounded-lg flex flex-col">
         {" "}
         <header className="w-full bg-primary px-8 py-6 text-white flex justify-between items-center rounded-t-lg">
           <h1 className="text-3xl font-title">CareerSageAI</h1>
-          <nav>
-            <ul className="flex gap-6">
-              <li>
-                <a href="#" className="hover:underline">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Search Jobs
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Interview Prep
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">
-                  Sign In
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <Navbar />
         </header>
-        <main className="px-8 py-12">
+        <main className="px-8 py-12 flex-1 flex flex-col justify-center items-center">
           <section className="text-center mb-12">
             <h2 className="text-4xl font-title mb-4">
               Find the Perfect Job for You!
@@ -86,21 +56,10 @@ export const MyPlugin = () => {
             </div>
           </section>
         </main>
-        <footer className="w-full bg-neutral-900 text-white py-6 text-center mt-auto rounded-b-lg">
-          <p>© 2024 CareerSage. All Rights Reserved.</p>
-          <div className="flex justify-center gap-4 mt-2">
-            <a href="#">
-              <i className="fa-brands fa-facebook"></i>
-            </a>
-            <a href="#">
-              <i className="fa-brands fa-twitter"></i>
-            </a>
-            <a href="#">
-              <i className="fa-brands fa-linkedin"></i>
-            </a>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );
 };
+
+export default App;

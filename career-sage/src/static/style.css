@@ -339,11 +339,8 @@ video {
 #webcrumbs .flex {
   display: flex;
 }
-#webcrumbs .min-h-\[800px\] {
-  min-height: 800px;
-}
-#webcrumbs .w-\[1200px\] {
-  width: 1200px;
+#webcrumbs .min-h-screen {
+  min-height: 100vh;
 }
 #webcrumbs .w-\[350px\] {
   width: 350px;
@@ -351,8 +348,14 @@ video {
 #webcrumbs .w-full {
   width: 100%;
 }
+#webcrumbs .flex-1 {
+  flex: 1 1 0%;
+}
 #webcrumbs .flex-row {
   flex-direction: row;
+}
+#webcrumbs .flex-col {
+  flex-direction: column;
 }
 #webcrumbs .flex-wrap {
   flex-wrap: wrap;
