@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../static/style.css';
 
 function Navbar() {
@@ -6,9 +7,9 @@ function Navbar() {
     <nav>
     <ul className="flex gap-6">
       <li>
-        <a href="#" className="hover:underline">
+        <Link to="/home" className="hover:underline">
           Home
-        </a>
+        </Link>
       </li>
       <li>
         <a href="#" className="hover:underline">
@@ -21,9 +22,9 @@ function Navbar() {
         </a>
       </li>
       <li>
-        <a href="#" className="hover:underline">
+        <Link to="/contact" className="hover:underline">
           Contact
-        </a>
+        </Link>
       </li>
       <li>
         <a href="#" className="hover:underline">
