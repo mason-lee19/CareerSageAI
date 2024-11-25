@@ -17,15 +17,8 @@
 html {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
-  font-family:
-    Poppins,
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
+  font-family: Poppins, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-feature-settings: normal;
   font-variation-settings: normal;
   -moz-tab-size: 4;
@@ -65,15 +58,8 @@ code,
 kbd,
 pre,
 samp {
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    Liberation Mono,
-    Courier New,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    Liberation Mono, Courier New, monospace;
   font-feature-settings: normal;
   font-size: 1em;
   font-variation-settings: normal;
@@ -328,6 +314,10 @@ video {
   --tw-contain-paint: ;
   --tw-contain-style: ;
 }
+#webcrumbs .mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
 #webcrumbs .my-4 {
   margin-bottom: 16px;
   margin-top: 16px;
@@ -356,8 +346,8 @@ video {
 #webcrumbs .max-w-md {
   max-width: 28rem;
 }
-#webcrumbs .flex-grow {
-  flex-grow: 1;
+#webcrumbs .flex-1 {
+  flex: 1 1 0%;
 }
 #webcrumbs .flex-row {
   flex-direction: row;
@@ -429,15 +419,8 @@ video {
   text-align: center;
 }
 #webcrumbs .font-title {
-  font-family:
-    Poppins,
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
+  font-family: Poppins, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 #webcrumbs .text-2xl {
   font-size: 24px;
