@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../components/footer.js";
 import "../static/style.css";
 
 function Home() {
