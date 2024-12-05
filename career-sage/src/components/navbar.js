@@ -12,14 +12,14 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <a href="#" className="hover:underline">
+          <Link to="/jobsearch" className="hover:underline">
             Search Jobs
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="hover:underline">
+          <Link to="/interviewprep" className="hover:underline">
             Interview Prep
-          </a>
+          </Link>
         </li>
         <li>
           <Link to="/contact" className="hover:underline">
