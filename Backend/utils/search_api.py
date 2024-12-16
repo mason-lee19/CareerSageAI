@@ -1,4 +1,5 @@
 from curl_cffi import requests as cureq
+from .logger_config import logger
 import os
 
 class SearchAPI():
@@ -8,7 +9,7 @@ class SearchAPI():
 
     def _create_session(self):
         """Creates and returns a curl_cffi session using the specified proxy."""
-        proxy=os.getenv("stickyproxy")
+        proxy=None
         return cureq.Session(impersonate="chrome",proxy=proxy)
 
         

@@ -132,6 +132,7 @@ class IndeedScraper:
         Returns:
             tuple: A tuple containing salary (str) and description (str).
         """
+
         resp = self.session.get(job_link,impersonate='chrome')
 
         if resp.status_code != 200:

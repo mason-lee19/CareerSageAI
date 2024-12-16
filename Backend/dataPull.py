@@ -16,7 +16,7 @@ def scrape_indeed(job_title:str,location:str,pages:int,dbHanlder):
             df (pd.DataFrame): DataFrame with job information
     """
     df = pd.DataFrame()
-    indeed_scraper = IndeedScraper(SearchAPI().session)
+    main_scraper = IndeedScraper(SearchAPI().session)
 
     ###
     # Figure out how many pages we want or pull max pages instead of manually adding pages
@@ -26,7 +26,7 @@ def scrape_indeed(job_title:str,location:str,pages:int,dbHanlder):
     consecutive_errors = 0
 
     while cur_page <= pages:
-        listing = indeed_scraper.get_search(job_title,location,cur_page*10)
+        listing = main_scraper.get_search(job_title,location,cur_page*10)
         # Instead of concat update to push to db file
         if isinstance(listing,JobListing):
             dbHanlder.add_job(listing)
@@ -43,7 +43,7 @@ def scrape_indeed(job_title:str,location:str,pages:int,dbHanlder):
         elif consecutive_errors == 1:
             break
         else:
-            logger.info('[MAIN] Maximum retries met, continuing to next page')
+            logger.warning('[MAIN] Maximum retries met, continuing to next page')
             cur_page += 1
             max_retries = 2
             consecutive_errors +=1 

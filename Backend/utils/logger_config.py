@@ -2,9 +2,12 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import os
+from datetime import datetime
 
 # Log file path
-log_file_path = os.path.join(os.path.dirname(__file__), "../logs", "error.log")
+now = datetime.now()
+file_name = now.strftime("%Y-%m-%d_%H-%M-%S_run.log")
+log_file_path = os.path.join(os.path.dirname(__file__), "../logs", file_name)
 
 # Ensure the logs directory exists
 os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
