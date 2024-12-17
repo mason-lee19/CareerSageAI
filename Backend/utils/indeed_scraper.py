@@ -9,6 +9,7 @@ import traceback
 
 from .string_util import StringUtil
 from .logger_config import logger
+from .search_api import SearchAPI
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
@@ -25,8 +26,8 @@ class JobListing(BaseModel):
     expirationStatus: List[bool]
 
 class IndeedScraper:
-    def __init__(self, session: cureq.Session):
-        self.session = session
+    def __init__(self, driver):
+        self.driver = driver
 
     def get_search(self, job_title:str, location:str, start_num:int):
         """
@@ -49,13 +50,14 @@ class IndeedScraper:
             logger.info(f'url: {url}')
             
             # Send the GET request
-            response = self.session.get(url, headers=HEADERS)
+            self.driver.get(url)
+            response = self.driver.page_source
 
-            if response.status_code != 200:
+            if not response:
                 # Raise an error for bad HTTP responses
-                logger.error(f'[Indeed Scraper] bad HTTP response: {response.raise_for_status()}')
-                #response.raise_for_status()
-                return response.status_code
+                logger.error(f'[Indeed Scraper] unable to get response : {response}')
+
+                return None
 
             # Pull job details and return as JobListing object
             return JobListing(**self.pull_job_details(response))
@@ -79,8 +81,8 @@ class IndeedScraper:
                     'jobCompany':[],'minSalary':[],
                     'maxSalary':[],'jobDetails':[],'jobLocation':[],'expirationStatus':[]}
 
-        if 'text/html' in resp.headers['Content-Type'] and resp.status_code == 200:
-            soup = BeautifulSoup(resp.text, 'html.parser')
+        if resp:
+            soup = BeautifulSoup(resp, 'html.parser')
 
             outer_most_point=soup.find('div',attrs={'id': 'mosaic-provider-jobcards'})
 
@@ -133,35 +135,36 @@ class IndeedScraper:
             tuple: A tuple containing salary (str) and description (str).
         """
 
-        resp = self.session.get(job_link,impersonate='chrome')
+        # Need to create seperate driver for each individual job link
+        seperate_driver = SearchAPI().driver
 
-        if resp.status_code != 200:
+        seperate_driver.get(job_link)
+        resp = seperate_driver.page_source
+
+        if not resp:
             logger.error(f'[Indeed Scraper] Error with individual job link : {job_link}')
             print(f'[Indeed Scraper] Something went wrong with individual job link')
             print(f'[Indeed Scraper] Waiting 10 seconds and trying again')
             time.sleep(10)
-            resp = self.session.get(job_link,impersonate='chrome')
+            seperate_driver.get(job_link)
+            resp = seperate_driver.page_source
+
 
         salary = 'Not Specified'
         description = 'None'
 
         try:
+            soup = BeautifulSoup(resp.text,'html.parser')
+            job_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
 
-            if 'text/html' in resp.headers['Content-Type'] and resp.status_code == 200:
+            if not job_container:
+                return 'Not Specified', 'None'
+            
+            # Extract salary info
+            salary = self._extract_salary(job_container)
 
-                soup = BeautifulSoup(resp.text,'html.parser')
-                job_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
-
-                if not job_container:
-                    return 'Not Specified', 'None'
-                
-                # Extract salary info
-                salary = self._extract_salary(job_container)
-
-                # Extract job description
-                description = self._extract_description(job_container)
-                
-            return salary,description
+            # Extract job description
+            description = self._extract_description(job_container)
         
         except Exception as e:
             print('[Indeed Scraper] Error getting salary and job description')
@@ -171,8 +174,10 @@ class IndeedScraper:
                          Salary : {salary}\n
                          Desc : {description}\n
                          Error : {e}''')
+
+        seperate_driver.quit()
             
-        return 'Not Specified', 'None'
+        return salary, description
     
     def _build_url(self, job_title: str, location: str, start_num: int) -> str:
         """
@@ -193,9 +198,15 @@ class IndeedScraper:
     
     def _check_expired_job(self,job_url:str) -> bool:
         """Search for any div with relevant text indicating expiration"""
-        response = self.session.get(job_url,impersonate='chrome')
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
+        seperate_driver = SearchAPI().driver
+
+        seperate_driver.get(job_url)
+        resp = seperate_driver.page_source
+
+        seperate_driver.quit()
+
+        if resp:
+            soup = BeautifulSoup(resp, 'html.parser')
             
             # Search for any div with relevant text indicating expiration
             expired_message = soup.find(lambda tag: tag.name == "div" and 
