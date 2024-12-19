@@ -26,8 +26,8 @@ class JobListing(BaseModel):
     expirationStatus: List[bool]
 
 class IndeedScraper:
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        self.search = SearchAPI()
 
     def get_search(self, job_title:str, location:str, start_num:int):
         """
@@ -50,8 +50,7 @@ class IndeedScraper:
             logger.info(f'url: {url}')
             
             # Send the GET request
-            self.driver.get(url)
-            response = self.driver.page_source
+            response = self.search.get_html(url)
 
             if not response:
                 # Raise an error for bad HTTP responses
@@ -136,19 +135,14 @@ class IndeedScraper:
         """
 
         # Need to create seperate driver for each individual job link
-        seperate_driver = SearchAPI().driver
-
-        seperate_driver.get(job_link)
-        resp = seperate_driver.page_source
+        resp = self.search.get_html(job_link)
 
         if not resp:
             logger.error(f'[Indeed Scraper] Error with individual job link : {job_link}')
             print(f'[Indeed Scraper] Something went wrong with individual job link')
             print(f'[Indeed Scraper] Waiting 10 seconds and trying again')
             time.sleep(10)
-            seperate_driver.get(job_link)
-            resp = seperate_driver.page_source
-
+            resp = self.search.get_html(job_link)
 
         salary = 'Not Specified'
         description = 'None'
@@ -168,14 +162,11 @@ class IndeedScraper:
         
         except Exception as e:
             print('[Indeed Scraper] Error getting salary and job description')
-            logger.error(f'''
-                         [Indeed Scraper] Error getting salary and job description\n
-                         Job Link : {job_link}\n
-                         Salary : {salary}\n
-                         Desc : {description}\n
+            logger.error(f'''[Indeed Scraper] Error getting salary and job description
+                         Job Link : {job_link}
+                         Salary : {salary}
+                         Desc : {description}
                          Error : {e}''')
-
-        seperate_driver.quit()
             
         return salary, description
     
@@ -198,12 +189,7 @@ class IndeedScraper:
     
     def _check_expired_job(self,job_url:str) -> bool:
         """Search for any div with relevant text indicating expiration"""
-        seperate_driver = SearchAPI().driver
-
-        seperate_driver.get(job_url)
-        resp = seperate_driver.page_source
-
-        seperate_driver.quit()
+        resp = self.search.get_html(job_url)
 
         if resp:
             soup = BeautifulSoup(resp, 'html.parser')

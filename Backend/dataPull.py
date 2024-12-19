@@ -16,7 +16,8 @@ def scrape_indeed(job_title:str,location:str,pages:int,dbHanlder):
             df (pd.DataFrame): DataFrame with job information
     """
     df = pd.DataFrame()
-    main_scraper = IndeedScraper(SearchAPI().driver)
+
+    main_scraper = IndeedScraper()
 
     ###
     # Figure out how many pages we want or pull max pages instead of manually adding pages
