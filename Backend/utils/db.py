@@ -31,8 +31,9 @@ class DataBase():
                 jobLink TEXT,
                 jobTitle TEXT,
                 jobCompany TEXT,
-                minSalary TEXT,
-                maxSalary TEXT,
+                minSalary INTEGER,
+                maxSalary INTEGER,
+                salaryUnit TEXT,
                 jobDetails TEXT,
                 jobLocation TEXT,
                 pullDate TEXT
@@ -86,11 +87,11 @@ class DataBase():
             if not self._job_exists(job_key):
                 pull_date = datetime.now().strftime('%Y-%m-%d')
                 self.cursor.execute(f'''
-                    INSERT INTO {self.config.table_name} (jobKey, jobLink, jobTitle, jobCompany, minSalary, maxSalary, jobDetails, jobLocation, pullDate)
+                    INSERT INTO {self.config.table_name} (jobKey,jobLink,jobTitle,jobCompany,minSalary,maxSalary,salaryUnit,jobDetails,jobLocation,pullDate)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''',(job_key, job_data.jobLink[idx], job_data.jobTitle[idx] ,job_data.jobCompany[idx],
-                    job_data.minSalary[idx], job_data.maxSalary[idx], job_data.jobDetails[idx],
-                    job_data.jobLocation[idx], pull_date))
+                    job_data.minSalary[idx], job_data.maxSalary[idx], job_data.salaryUnit[idx],
+                    job_data.jobDetails[idx], job_data.jobLocation[idx], pull_date))
                 
                 self.conn.commit()
 
