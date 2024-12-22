@@ -1,11 +1,9 @@
-from curl_cffi import requests as cureq
 from pydantic import BaseModel
 from typing import List
 from bs4 import BeautifulSoup
-import re
+import json
 import os
-import time
-import traceback
+import re
 
 from .string_util import StringUtil
 from .logger_config import logger, log_and_print
@@ -19,8 +17,9 @@ class JobListing(BaseModel):
     jobLink: List[str]
     jobTitle: List[str]
     jobCompany: List[str]
-    minSalary: List[str]
-    maxSalary: List[str]
+    minSalary: List[int]
+    maxSalary: List[int]
+    salaryUnit: List[str]
     jobDetails: List[str]
     jobLocation: List[str]
     expirationStatus: List[bool]
@@ -100,9 +99,9 @@ class IndeedScraper:
         Returns:
             job_list (dict): Job detail dictionary to fill JobListing BaseModel
         """
-        job_list = {'jobLink':[],'jobTitle':[],
-                    'jobCompany':[],'minSalary':[],
-                    'maxSalary':[],'jobDetails':[],'jobLocation':[],'expirationStatus':[]}
+        job_list = {'jobLink':[],'jobTitle':[],'jobCompany':[],
+                    'minSalary':[],'maxSalary':[],'salaryUnit':[],
+                    'jobDetails':[],'jobLocation':[],'expirationStatus':[]}
 
         if self.mode == 'online' and resp:
             soup = BeautifulSoup(resp, 'html.parser')
@@ -177,19 +176,20 @@ class IndeedScraper:
             if not job_resp:
                 log_and_print(f'[Indeed Scraper] Error with individual job link : {job_link}')
             else:
-                job_salary,job_description = self.pull_job_desc(job_resp)
+                job_salary_info,job_description = self.pull_job_desc_salary(job_resp)
                 expiration = self._check_expired_job(job_resp)
 
         elif self.mode == 'offline':
-            job_salary,job_description = self.pull_job_desc(job_html)
+            job_salary_info,job_description = self.pull_job_desc_salary(job_html)
             expiration = self._check_expired_job(job_html)
 
-        min_salary, max_salary = self._get_clean_salary(job_salary)
+        min_salary, max_salary, salary_unit = job_salary_info[0], job_salary_info[1], job_salary_info[2]
 
         job_list['jobLink'].append(job_link)
 
         job_list['minSalary'].append(min_salary)
         job_list['maxSalary'].append(max_salary)
+        job_list['salaryUnit'].append(salary_unit)
         job_list['jobDetails'].append(job_description)
 
         job_list['jobTitle'].append(
@@ -206,40 +206,41 @@ class IndeedScraper:
 
         return job_list
 
-    def pull_job_desc(self,job_resp) -> tuple:
+    def pull_job_desc_salary(self,job_resp) -> tuple:
         """
         Fetches the job salary and description from the given job link.
 
         Args:
-            job_link (str): URL of the job posting.
+            job_resp : Returned html response from individual job page.
 
         Returns:
             tuple: A tuple containing salary (str) and description (str).
         """
-        salary = 'Not Specified'
-        description = 'None'
+        salary_info = (None,None,None)
+        description = None
 
         try:
-            soup = BeautifulSoup(job_resp.text,'html.parser')
-            job_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
+            soup = BeautifulSoup(job_resp,'html.parser')
+            salary_container = soup.find('script', type="application/ld+json")
+            desc_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
 
-            if not job_container:
-                return 'Not Specified', 'None'
+            if not salary_container and desc_container:
+                return salary_info,description
             
             # Extract salary info
-            salary = self._extract_salary(job_container)
+            salary_info = self._extract_salary(salary_container)
 
             # Extract job description
-            description = self._extract_description(job_container)
+            description = self._extract_description(desc_container)
         
         except Exception as e:
             print('[Indeed Scraper] Error getting salary and job description')
             logger.error(f'''[Indeed Scraper] Error getting salary and job description
-                         Salary : {salary}
+                         Salary Info : {salary_info}
                          Desc : {description}
                          Error : {e}''')
             
-        return salary, description
+        return salary_info, description
     
     def _collect_file_paths(self,folder_path):
         """
@@ -314,8 +315,14 @@ class IndeedScraper:
     @staticmethod
     def _extract_salary(container: BeautifulSoup) -> str:
         """Helper function to extract the salary information from the job container."""
-        raw_salary = container.find('div',attrs={'id':'salaryInfoAndJobType'})
-        return raw_salary.get_text() if raw_salary else 'Not Specified'
+        salary_data = json.loads(container.string)
+        base_salary = salary_data.get('baseSalary', {}).get('value', {})
+
+        min_salary = base_salary.get('minValue')
+        max_salary = base_salary.get('maxValue')
+        salary_unit = base_salary.get('unitText')
+
+        return (int(min_salary),int(max_salary),str(salary_unit)) if base_salary else (None,None,None)
 
     @staticmethod
     def _extract_description(container: BeautifulSoup) -> str:

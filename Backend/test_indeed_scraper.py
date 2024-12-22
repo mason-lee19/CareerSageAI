@@ -16,8 +16,9 @@ class TestScraper(unittest.TestCase):
             "jobLink": ['https://www.indeed.com/rc/clk?jk=b03dc910761bd8c7&bb=mfJCwUfMVybas6Zkkv4fRijftvJqAklMfGPEsgvBIWWxxwg8IjanGIm3BCe1LVKfrzwsean-Bu7BjVH5o3EIKVRgBwFh_BZTDUddaP_-LF10sJfHwJ7qzP5hN63bC5DK&xkcb=SoCU67M34y1HzTyNnJ0KbzkdCdPP&fccid=86e9be6ce380173e&vjs=3'],
             "jobTitle": ['Data Engineer'],
             "jobCompany": ['Tesla'],
-            "minSalary": ["80000"],
-            "maxSalary": ["186000"],
+            "minSalary": [80000],
+            "maxSalary": [186000],
+            "salaryUnit": ["YEAR"],
             "jobDetails": ["Job Details"],
             "jobLocation": ['Palo Alto, CA 94304'],
             "expirationStatus": [False],
@@ -31,9 +32,20 @@ class TestScraper(unittest.TestCase):
         """
 
         result = self.scraper.get_search()
-        print(result)
+        self._print_result(result)
         # Assertions to compare actual and expected outputs
         self._assert_job_listing(result, self.expected_output)
+
+    @staticmethod
+    def _print_result(result):
+        print('Results:')
+        print(f'result[jobTitle]         : {result.jobTitle}')
+        print(f'result[jobCompany]       : {result.jobCompany}')
+        print(f'result[minSalary]        : {result.minSalary}')
+        print(f'result[maxSalary]        : {result.maxSalary}')
+        print(f'result[salaryUnit]       : {result.salaryUnit}')
+        print(f'result[jobLocation]      : {result.jobLocation}')
+        print(f'result[expirationStatus] : {result.expirationStatus}')
 
     @staticmethod
     def _assert_job_listing(actual: JobListing, expected: JobListing):
@@ -58,6 +70,8 @@ class TestScraper(unittest.TestCase):
             errors.append(f"minSalary mismatch: {expected.minSalary} != {actual.minSalary}")
         if expected.maxSalary != actual.maxSalary:
             errors.append(f"maxSalary mismatch: {expected.maxSalary} != {actual.maxSalary}")
+        if expected.salaryUnit != actual.salaryUnit:
+            errors.append(f"salaryUnit mismatch: {expected.salaryUnit} != {actual.salaryUnit}")
         if expected.jobLocation != actual.jobLocation:
             errors.append(f"jobLocation mismatch: {expected.jobLocation} != {actual.jobLocation}")
         if actual.jobDetails == ['None']:
