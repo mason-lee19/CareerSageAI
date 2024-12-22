@@ -8,7 +8,7 @@ import time
 import traceback
 
 from .string_util import StringUtil
-from .logger_config import logger
+from .logger_config import logger, log_and_print
 from .search_api import SearchAPI
 
 HEADERS = {
@@ -26,10 +26,26 @@ class JobListing(BaseModel):
     expirationStatus: List[bool]
 
 class IndeedScraper:
-    def __init__(self):
-        self.search = SearchAPI()
+    def __init__(self,mode="online",folder_path=None):
+        """
+        Intializes scraper tool to pull job links from main indeed mosaic and info from individual job links
 
-    def get_search(self, job_title:str, location:str, start_num:int):
+        Args:
+            mode (online/offline): online pulls from online urls, offline is for testing with html from ../PageTests folder
+            folder_path (str): If offline use to define PageTests folder to use saved html pages
+        """
+        self.mode = mode
+
+        # Setup pulling from PageTests folder for html code instead of url
+        if self.mode == 'offline':
+            self.folder_path = folder_path
+            self.mosaic_page = folder_path + '/jobmosaic.html'
+            self.job_links = self._collect_file_paths(folder_path)
+
+        elif self.mode == 'online':
+            self.search = SearchAPI()
+
+    def get_search(self, job_title:str=None, location:str=None, start_num:int=None):
         """
         Fetches job listings from Indeed based on job title, location, and start number.
 
@@ -41,8 +57,8 @@ class IndeedScraper:
         Returns:
             JobListing: A JobListing object populated with the fetched job details.
         """
-        try:
-            print(f'[Indeed Scraper] Pulling Indeed Job Information for: {job_title} - {location} - page: {int(start_num//10)}')
+        if self.mode == 'online':
+            log_and_print(f'[Indeed Scraper] Pulling Indeed Job Information for: {job_title} - {location} - page: {int(start_num//10)}')
             
             # Construct the search URL
             url = self._build_url(job_title, location, start_num)
@@ -59,12 +75,20 @@ class IndeedScraper:
                 return None
 
             # Pull job details and return as JobListing object
-            return JobListing(**self.pull_job_details(response))
+            job_details = self.pull_job_details(response)
+            return JobListing(**job_details)
 
-        except Exception as e:
-            logger.info(f'[Indeed Scraper] Error fetching job listings {e}')
-            print(f"[Indeed Scraper] Error fetching job listings: {e}")
-            return None
+        
+        else:
+            log_and_print(f'[Indeed Scraper] Pulling Indeed job information from {self.folder_path}')
+
+            with open(self.mosaic_page, 'r', encoding='utf-8') as file:
+                mosaic_html_content = file.read()
+
+            job_details = self.pull_job_details(mosaic_html_content)
+
+            return JobListing(**job_details)
+
 
     def pull_job_details(self,resp):
         """
@@ -80,50 +104,109 @@ class IndeedScraper:
                     'jobCompany':[],'minSalary':[],
                     'maxSalary':[],'jobDetails':[],'jobLocation':[],'expirationStatus':[]}
 
-        if resp:
+        if self.mode == 'online' and resp:
             soup = BeautifulSoup(resp, 'html.parser')
 
             outer_most_point=soup.find('div',attrs={'id': 'mosaic-provider-jobcards'})
 
-            for job in outer_most_point.find('ul'):
-                a = job.find('a')
-                if not a:
-                    continue
+            if outer_most_point:
+                for job in outer_most_point.find('ul'):
+                    job_list = self._process_job_element(job,job_list)
 
-                job_link = self._get_indeed_url(a.get('href'))
+        elif self.mode == 'offline':
+            soup = BeautifulSoup(resp, 'html.parser')
 
-                # Check if job link is an ad
-                if 'rc' not in set(job_link.split('/')):
-                    logger.error(f'Bad url found skipping: {job_link}')
-                    continue
+            outer_most_point=soup.find('div',attrs={'id': 'mosaic-provider-jobcards'})
 
-                job_list['jobLink'].append(job_link)
+            job_idx = 0
 
-                job_salary,job_description = self.pull_job_desc(job_link)
+            if outer_most_point:
+                for job in outer_most_point.find('ul'):
+                    a = job.find('a')
+                    if not a:
+                        continue
+                    #print(self._get_indeed_url(a.get('href')))
+                    # Only iterate through the pages that we have saved in page tests folder
+                    
+                    if job_idx+1 > len(self.job_links):
+                        break
+
+                    with open(self.job_links[job_idx],'r',encoding='utf-8') as file:
+                        cur_job_html = file.read()
+
+                    job_list_len = len(job_list['jobLink'])
+
+                    job_list = self._process_job_element(job,job_list,cur_job_html)
+
+                    if job_list_len < len((job_list['jobLink'])):
+                        job_idx += 1
+                    
+
+        else:
+            logger.error(f"[Indeed Scraper] Invalid mode or no response provided for online mode... mode = {self.mode}")
+
+
+        return job_list
     
-                min_salary, max_salary = self._get_clean_salary(job_salary)
+    def _process_job_element(self,job,job_list,job_html=None) -> dict:
+        """
+        Processes an individual job element and appends details to the job_list.
 
-                job_list['minSalary'].append(min_salary)
-                job_list['maxSalary'].append(max_salary)
-                job_list['jobDetails'].append(job_description)
+        Args:
+            job: The job HTML element.
+            job_list: The dictionary to store job details.
 
-                job_list['jobTitle'].append(
-                    StringUtil.extract_text(job.find('span', id=lambda x: x and x.startswith('jobTitle-')))
-                )
-                job_list['jobCompany'].append(
-                    StringUtil.extract_text(job.find('span', {'data-testid': 'company-name'}))
-                )
-                job_list['jobLocation'].append(
-                    StringUtil.extract_text(job.find('div', {'data-testid': 'text-location'}))
-                )
+        Return:
+            job_list: Updated job_list dictionary
+        """
+        a = job.find('a')
 
-                job_list['expirationStatus'].append(
-                    self._check_expired_job(job_link)
-                )
+        if not a:
+            return job_list
+        
+        job_link = self._get_indeed_url(a.get('href'))
+
+        # Check if job link is an ad
+        if 'rc' not in set(job_link.split('/')):
+            logger.error(f'Bad url found skipping: {job_link}')
+            return job_list
+
+        if self.mode == 'online':
+            job_resp = self.search.get_html(job_link)
+            
+            if not job_resp:
+                log_and_print(f'[Indeed Scraper] Error with individual job link : {job_link}')
+            else:
+                job_salary,job_description = self.pull_job_desc(job_resp)
+                expiration = self._check_expired_job(job_resp)
+
+        elif self.mode == 'offline':
+            job_salary,job_description = self.pull_job_desc(job_html)
+            expiration = self._check_expired_job(job_html)
+
+        min_salary, max_salary = self._get_clean_salary(job_salary)
+
+        job_list['jobLink'].append(job_link)
+
+        job_list['minSalary'].append(min_salary)
+        job_list['maxSalary'].append(max_salary)
+        job_list['jobDetails'].append(job_description)
+
+        job_list['jobTitle'].append(
+            StringUtil.extract_text(job.find('span', id=lambda x: x and x.startswith('jobTitle-')))
+        )
+        job_list['jobCompany'].append(
+            StringUtil.extract_text(job.find('span', {'data-testid': 'company-name'}))
+        )
+        job_list['jobLocation'].append(
+            StringUtil.extract_text(job.find('div', {'data-testid': 'text-location'}))
+        )
+
+        job_list['expirationStatus'].append(expiration)
 
         return job_list
 
-    def pull_job_desc(self,job_link:str) -> tuple:
+    def pull_job_desc(self,job_resp) -> tuple:
         """
         Fetches the job salary and description from the given job link.
 
@@ -133,22 +216,11 @@ class IndeedScraper:
         Returns:
             tuple: A tuple containing salary (str) and description (str).
         """
-
-        # Need to create seperate driver for each individual job link
-        resp = self.search.get_html(job_link)
-
-        if not resp:
-            logger.error(f'[Indeed Scraper] Error with individual job link : {job_link}')
-            print(f'[Indeed Scraper] Something went wrong with individual job link')
-            print(f'[Indeed Scraper] Waiting 10 seconds and trying again')
-            time.sleep(10)
-            resp = self.search.get_html(job_link)
-
         salary = 'Not Specified'
         description = 'None'
 
         try:
-            soup = BeautifulSoup(resp.text,'html.parser')
+            soup = BeautifulSoup(job_resp.text,'html.parser')
             job_container = soup.find('div',class_=re.compile(r'^fastviewjob'))
 
             if not job_container:
@@ -163,12 +235,33 @@ class IndeedScraper:
         except Exception as e:
             print('[Indeed Scraper] Error getting salary and job description')
             logger.error(f'''[Indeed Scraper] Error getting salary and job description
-                         Job Link : {job_link}
                          Salary : {salary}
                          Desc : {description}
                          Error : {e}''')
             
         return salary, description
+    
+    def _collect_file_paths(self,folder_path):
+        """
+        Iterates through a folder and collects all file paths into an array.
+
+        Args:
+            folder_path (str): The path to the folder.
+
+        Returns:
+            list: A list containing the full paths of all files in the folder.
+        """
+        file_paths = []
+
+        for root, _, files in os.walk(folder_path):
+            for file in files:
+                #Skip the main mosaic page to just collect individual job links for description and salary
+                if file == 'jobmosaic.html':
+                    continue
+                full_path = os.path.join(root, file)
+                file_paths.append(full_path)
+
+        return file_paths
     
     def _build_url(self, job_title: str, location: str, start_num: int) -> str:
         """
@@ -187,9 +280,8 @@ class IndeedScraper:
 
         return f"https://www.indeed.com/jobs?q={formatted_job_title}&l={formatted_location}+CA&start={str(start_num)}"
     
-    def _check_expired_job(self,job_url:str) -> bool:
+    def _check_expired_job(self,resp) -> bool:
         """Search for any div with relevant text indicating expiration"""
-        resp = self.search.get_html(job_url)
 
         if resp:
             soup = BeautifulSoup(resp, 'html.parser')
@@ -199,11 +291,10 @@ class IndeedScraper:
                                         "This job has expired on Indeed" in tag.get_text())
             
             if expired_message:
-                logger.info(f'Job has expired : {job_url}')
                 return True
             return False
         else:
-            logger.error(f'Unable to retrieve individual job url : {job_url}')
+            logger.error(f'Unable to retrieve individual job url')
             return False
 
     @staticmethod

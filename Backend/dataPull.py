@@ -1,4 +1,4 @@
-from utils import DataBase, DataBaseSQLConfig, IndeedScraper, SearchAPI, JobListing
+from utils import DataBase, DataBaseSQLConfig, IndeedScraper, JobListing
 from utils.logger_config import logger
 import pandas as pd
 import time

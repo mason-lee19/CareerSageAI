@@ -29,3 +29,14 @@ logger.addHandler(handler)
 
 # Prevents logging duplication if logger is imported in multiple places
 logger.propagate = False
+
+
+def log_and_print(message,log_level='info'):
+    """
+    Method to log and print messages for better consistency.
+    """
+    print(f"{message}")
+    if log_level == "info":
+        logger.info(message)
+    elif log_level == "error":
+        logger.error(message)
