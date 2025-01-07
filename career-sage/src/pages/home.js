@@ -28,7 +28,7 @@ function Home() {
 
       <section id="how-it-works" className="py-16">
         <h3 className="text-2xl font-title text-center mb-12">How It Works</h3>
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 gap-164">
           <div className="text-center">
             <div className="h-[250px] w-[400px] bg-neutral-200 rounded-md mx-auto mb-4 flex-1 items-center justify-center">
               <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
@@ -37,7 +37,7 @@ function Home() {
               <h4 className="text-xl font-semibold mb-2 py-3">
                 Login and Create a Profile
               </h4>
-              <p>Sign up and tell us about yourself.</p>
+              <p className="px-6">Sign up and tell us about yourself.</p>
             </div>
           </div>
           <div className="text-center">
@@ -48,7 +48,9 @@ function Home() {
               <h4 className="text-xl font-semibold mb-2 py-3">
                 Upload Your Resume
               </h4>
-              <p>Let our algorithms analyze your skills and experiences.</p>
+              <p className="px-6">
+                Let our algorithms analyze your skills and experiences.
+              </p>
             </div>
           </div>
           <div className="text-center">
@@ -59,7 +61,7 @@ function Home() {
               <h4 className="text-xl font-semibold mb-2 py-3">
                 Find Your Matches
               </h4>
-              <p>
+              <p className="px-6">
                 Search for jobs based on your skills and keywords, and see a
                 match score for each job.
               </p>
@@ -73,16 +75,25 @@ function Home() {
         className="px-8 py-16 bg-neutral-200 bg-primary rounded-t-lg rounded-b-lg"
       >
         <h3 className="text-2xl font-title text-center mb-12">Features</h3>
-        <div className="grid grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-md shadow-sm">
+        <div className="grid grid-cols-3 gap-64 h-[150px] mb-12">
+          <div className="bg-white px-6 py-3 w-[300px] rounded-md shadow-sm">
+            <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
+              Check
+            </span>
             <h4 className="text-xl font-semibold mb-2">AI-Powered Matching</h4>
             <p>Advanced algorithms tailored to your resume.</p>
           </div>
-          <div className="bg-white p-6 rounded-md shadow-sm">
+          <div className="bg-white px-6 py-3 w-[300px] rounded-md shadow-sm">
+            <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
+              Sliders
+            </span>
             <h4 className="text-xl font-semibold mb-2">Match Score</h4>
             <p>Quantify how well you align with each job.</p>
           </div>
-          <div className="bg-white p-6 rounded-md shadow-sm">
+          <div className="bg-white px-6 py-3 w-[300px] rounded-md shadow-sm">
+            <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
+              Partner_Reports
+            </span>
             <h4 className="text-xl font-semibold mb-2">Keyword Insights</h4>
             <p>Discover relevant jobs based on your search criteria.</p>
           </div>
@@ -93,7 +104,7 @@ function Home() {
         <h3 className="text-2xl font-title text-center mb-12">
           What Our Users Say
         </h3>
-        <div className="flex gap-8">
+        <div className="flex gap-164">
           <div className="flex flex-col items-center">
             <img
               src="https://tools-api.webcrumbs.org/image-placeholder/100/100/avatars/1"

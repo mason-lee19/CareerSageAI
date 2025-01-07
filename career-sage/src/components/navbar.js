@@ -17,11 +17,6 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/interviewprep" className="hover:underline">
-            Interview Prep
-          </Link>
-        </li>
-        <li>
           <Link to="/contact" className="hover:underline">
             Contact
           </Link>

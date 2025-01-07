@@ -377,6 +377,9 @@ video {
 #webcrumbs .h-\[100px\] {
   height: 100px;
 }
+#webcrumbs .h-\[150px\] {
+  height: 150px;
+}
 #webcrumbs .h-\[200px\] {
   height: 200px;
 }
@@ -394,6 +397,9 @@ video {
 }
 #webcrumbs .w-\[100px\] {
   width: 100px;
+}
+#webcrumbs .w-\[300px\] {
+  width: 300px;
 }
 #webcrumbs .w-\[400px\] {
   width: 400px;
@@ -431,7 +437,10 @@ video {
 #webcrumbs .gap-6 {
   gap: 24px;
 }
-#webcrumbs .gap-8 {
+#webcrumbs .gap-64 {
+  gap: 64px;
+}
+#webcrumbs .gap-164 {
   gap: 164px;
 }
 #webcrumbs .rounded-full {
