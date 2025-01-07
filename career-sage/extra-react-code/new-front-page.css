@@ -21,15 +21,8 @@
 html {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
-  font-family:
-    Open Sans,
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
+  font-family: Open Sans, ui-sans-serif, system-ui, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-feature-settings: normal;
   font-variation-settings: normal;
   -moz-tab-size: 4;
@@ -69,15 +62,8 @@ code,
 kbd,
 pre,
 samp {
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    Liberation Mono,
-    Courier New,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    Liberation Mono, Courier New, monospace;
   font-feature-settings: normal;
   font-size: 1em;
   font-variation-settings: normal;
@@ -498,26 +484,12 @@ video {
   text-align: center;
 }
 #webcrumbs .font-sans {
-  font-family:
-    Open Sans,
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
+  font-family: Open Sans, ui-sans-serif, system-ui, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 #webcrumbs .font-title {
-  font-family:
-    Lato,
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol,
-    Noto Color Emoji;
+  font-family: Lato, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 #webcrumbs .text-2xl {
   font-size: 24px;
