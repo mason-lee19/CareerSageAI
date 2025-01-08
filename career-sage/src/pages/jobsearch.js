@@ -1,12 +1,11 @@
 import React from "react";
 import "../static/style.css";
-import "../static/jobsearch.css";
 
 function JobSearch() {
   return (
     <div id="webcrumbs">
       <div className="w-[1200px] min-h-screen flex flex-col mx-auto bg-white rounded-lg shadow-lg">
-      <header className="flex flex-col items-center p-8 text-center">
+        <header className="flex flex-col items-center p-8 text-center">
           <h1 className="text-4xl font-bold font-title mb-4 text-neutral-950">
             CareerSageAI
           </h1>
