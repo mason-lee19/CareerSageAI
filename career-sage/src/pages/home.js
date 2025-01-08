@@ -26,76 +26,78 @@ function Home() {
         </div>
       </section>
 
-      <section id="how-it-works" className="py-16">
-        <h3 className="text-2xl font-title text-center mb-12">How It Works</h3>
+      <section id="features" className="py-16">
         <div className="grid grid-cols-3 gap-164">
           <div className="text-center">
             <div className="h-[250px] w-[400px] bg-neutral-200 rounded-md mx-auto mb-4 flex-1 items-center justify-center">
               <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
-                account_circle
+                Check
               </span>
               <h4 className="text-xl font-semibold mb-2 py-3">
-                Login and Create a Profile
-              </h4>
-              <p className="px-6">Sign up and tell us about yourself.</p>
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="h-[250px] w-[400px] bg-neutral-200 rounded-md mx-auto mb-4 flex-1 items-center justify-center">
-              <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
-                upload
-              </span>
-              <h4 className="text-xl font-semibold mb-2 py-3">
-                Upload Your Resume
+                AI-Powered Matching
               </h4>
               <p className="px-6">
-                Let our algorithms analyze your skills and experiences.
+                Advanced algorithms tailored to your resume.
               </p>
             </div>
           </div>
           <div className="text-center">
             <div className="h-[250px] w-[400px] bg-neutral-200 rounded-md mx-auto mb-4 flex-1 items-center justify-center">
               <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
-                search
+                Sliders
+              </span>
+              <h4 className="text-xl font-semibold mb-2 py-3">Match Score</h4>
+              <p className="px-6">Quantify how well you align with each job.</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="h-[250px] w-[400px] bg-neutral-200 rounded-md mx-auto mb-4 flex-1 items-center justify-center">
+              <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
+                Partner_Reports
               </span>
               <h4 className="text-xl font-semibold mb-2 py-3">
-                Find Your Matches
+                Keyword Insights
               </h4>
               <p className="px-6">
-                Search for jobs based on your skills and keywords, and see a
-                match score for each job.
+                Discover relevent jobs based on your search criteria.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section
-        id="features"
-        className="px-8 py-16 bg-neutral-200 bg-primary rounded-t-lg rounded-b-lg"
-      >
-        <h3 className="text-2xl font-title text-center mb-12">Features</h3>
-        <div className="grid grid-cols-3 gap-64 h-[150px] mb-12">
-          <div className="bg-white px-6 py-3 w-[300px] rounded-md shadow-sm">
-            <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
-              Check
-            </span>
-            <h4 className="text-xl font-semibold mb-2">AI-Powered Matching</h4>
-            <p>Advanced algorithms tailored to your resume.</p>
-          </div>
-          <div className="bg-white px-6 py-3 w-[300px] rounded-md shadow-sm">
-            <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
-              Sliders
-            </span>
-            <h4 className="text-xl font-semibold mb-2">Match Score</h4>
-            <p>Quantify how well you align with each job.</p>
-          </div>
-          <div className="bg-white px-6 py-3 w-[300px] rounded-md shadow-sm">
-            <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
-              Partner_Reports
-            </span>
-            <h4 className="text-xl font-semibold mb-2">Keyword Insights</h4>
-            <p>Discover relevant jobs based on your search criteria.</p>
+      <section id="how-it-works" className="py-16 bg-white w-full">
+        <div className="mx-auto px-8">
+          <h3 className="text-2xl font-title text-center mb-12">
+            How it works
+          </h3>
+          <div className="h-[150px] mb-12 text-center px-8 grid grid-cols-3 items-center justify-center gap-12">
+            <div className="bg-white px-6 py-3 mx-auto w-[400px]">
+              <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
+                account_circle
+              </span>
+              <h4 className="text-xl font-semibold mb-2">
+                Login and Create a Profile
+              </h4>
+              <p>Sign up and tell us about yourself.</p>
+            </div>
+            <div className="bg-white px-6 py-3 mx-auto w-[400px]">
+              <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
+                Upload
+              </span>
+              <h4 className="text-xl font-semibold mb-2">Upload your resume</h4>
+              <p>Let our algorithms analyze your skills and experiences.</p>
+            </div>
+            <div className="bg-white px-6 py-3 mx-2 mx-auto w-[400px]">
+              <span className="material-symbols-outlined text-primary-500 text-6xl py-12">
+                Search
+              </span>
+              <h4 className="text-xl font-semibold mb-2">Find your matches</h4>
+              <p>
+                Search for jobs based on your skills and keywords, and see a
+                match score for each job.
+              </p>
+            </div>
           </div>
         </div>
       </section>

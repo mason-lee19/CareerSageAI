@@ -501,6 +501,10 @@ video {
 #webcrumbs .p-6 {
   padding: 24px;
 }
+#webcrumbs .px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 #webcrumbs .px-6 {
   padding-left: 24px;
   padding-right: 24px;
