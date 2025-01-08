@@ -344,9 +344,6 @@ video {
   margin-left: auto;
   margin-right: auto;
 }
-#webcrumbs .mb-12 {
-  margin-bottom: 48px;
-}
 #webcrumbs .mb-2 {
   margin-bottom: 8px;
 }
@@ -355,6 +352,9 @@ video {
 }
 #webcrumbs .mb-6 {
   margin-bottom: 24px;
+}
+#webcrumbs .mb-12 {
+  margin-bottom: 48px;
 }
 #webcrumbs .ml-4 {
   margin-left: 16px;
@@ -398,6 +398,9 @@ video {
 #webcrumbs .w-\[100px\] {
   width: 100px;
 }
+#webcrumbs .w-\[200px\] {
+  width: 200px;
+}
 #webcrumbs .w-\[300px\] {
   width: 300px;
 }
@@ -406,9 +409,6 @@ video {
 }
 #webcrumbs .w-\[1200px\] {
   width: 1200px;
-}
-#webcrumbs .w-\[200px\] {
-  width: 200px;
 }
 #webcrumbs .cursor-pointer {
   cursor: pointer;
@@ -513,25 +513,25 @@ video {
   padding-left: 32px;
   padding-right: 32px;
 }
-#webcrumbs .py-16 {
-  padding-bottom: 64px;
-  padding-top: 64px;
-}
 #webcrumbs .py-12 {
   padding-bottom: 48px;
   padding-top: 48px;
+}
+#webcrumbs .py-16 {
+  padding-bottom: 64px;
+  padding-top: 64px;
 }
 #webcrumbs .py-3 {
   padding-bottom: 12px;
   padding-top: 12px;
 }
-#webcrumbs .py-8 {
-  padding-bottom: 32px;
-  padding-top: 32px;
-}
 #webcrumbs .py-6 {
   padding-bottom: 24px;
   padding-top: 24px;
+}
+#webcrumbs .py-8 {
+  padding-bottom: 32px;
+  padding-top: 32px;
 }
 #webcrumbs .text-center {
   text-align: center;
