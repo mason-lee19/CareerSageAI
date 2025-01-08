@@ -4,168 +4,90 @@ import "../static/style.css";
 function JobSearch() {
   return (
     <div id="webcrumbs">
-      <div className="w-[1200px] min-h-screen flex flex-col mx-auto bg-white rounded-lg shadow-lg">
-        <header className="flex flex-col items-center p-8 text-center">
-          <h1 className="text-4xl font-bold font-title mb-4 text-neutral-950">
-            CareerSageAI
-          </h1>
-          <p className="text-lg text-neutral-700">
-            Find the job that best fits your skills and experience
-          </p>
-        </header>
-        <section className="flex justify-center p-6">
-          <div className="w-[600px] relative">
+      <div className="bg-white rounded-lg shadow-lg flex flex-col">
+        {" "}
+        {/* Search Bar Section */}
+        <section className="p-8 border-b border-neutral-200">
+          <div className="flex items-center gap-4">
             <input
-              type="text"
-              placeholder="Search jobs by title, skill, or company..."
-              className="w-full p-4 text-lg border border-neutral-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="flex-grow max-width width-36 py-3 px-4 bg-neutral-100 rounded-md text-neutral-950 text-lg"
+              placeholder="Search by job title, skill, or company..."
             />
-            <button className="absolute right-2 top-2 p-3 bg-primary-500 text-white rounded-md">
-              <span className="material-symbols-outlined">search</span>
+            <button className="py-3 px-6 bg-primary-500 text-primary-50 rounded-md text-lg shadow-sm hover:bg-primary-600">
+              Search
             </button>
           </div>
+          <div className="mt-4 flex gap-4">
+            {/* Filters */}
+            <select className="py-2 px-4 bg-neutral-100 rounded-md text-neutral-950 text-sm">
+              <option>Location</option>
+              <option>Remote</option>
+              <option>On-site</option>
+            </select>
+            <select className="py-2 px-4 bg-neutral-100 rounded-md text-neutral-950 text-sm">
+              <option>Salary Range</option>
+              <option>$50k-$70k</option>
+              <option>$70k-$100k</option>
+            </select>
+            <select className="py-2 px-4 bg-neutral-100 rounded-md text-neutral-950 text-sm">
+              <option>Job Type</option>
+              <option>Full-Time</option>
+              <option>Part-Time</option>
+            </select>
+            <select className="py-2 px-4 bg-neutral-100 rounded-md text-neutral-950 text-sm">
+              <option>Experience Level</option>
+              <option>Entry</option>
+              <option>Mid</option>
+              <option>Senior</option>
+            </select>
+          </div>
         </section>
-        {/* Filter Section */}
-        <section className="p-6">
-          <details className="relative bg-neutral-100 rounded-md border border-neutral-300 p-4">
-            <summary className="cursor-pointer font-semibold text-neutral-900">
-              Filter Options
-            </summary>
-            <div className="mt-4 space-y-4">
-              <div className="flex items-center gap-4">
-                <label className="text-neutral-700">Location:</label>
-                <input
-                  type="text"
-                  placeholder="Enter location"
-                  className="flex-1 p-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
+        {/* AI Assistant Section */}
+        <aside className="relative mt-8 p-8 bg-neutral-100 rounded-md flex items-start gap-4">
+          <span className="material-symbols-outlined text-primary-500">
+            chat
+          </span>
+          <p className="text-neutral-950 text-l center-items">
+            Hi there! Tell me what kind of job you're looking for, and I’ll find
+            the best matches for you!
+          </p>
+        </aside>
+        {/* Job Results Section */}
+        <section className="flex-1 p-8 grid grid-cols-3 gap-6">
+          {[...Array(6)].map((_, index) => (
+            <div
+              key={index}
+              className="p-6 bg-neutral-100 rounded-md hover:shadow-lg transition-shadow"
+            >
+              <h3 className="font-title text-xl font-bold text-neutral-950 cursor-pointer">
+                Software Engineer
+              </h3>
+              <p className="text-neutral-600">Tech Company</p>
+              <div className="flex items-center gap-2 mt-2">
+                <span className="material-symbols-outlined text-neutral-600">
+                  place
+                </span>
+                <span className="text-neutral-600">San Francisco, CA</span>
               </div>
-              <div className="flex items-center gap-4">
-                <label className="text-neutral-700">Job Type:</label>
-                <select className="flex-1 p-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500">
-                  <option>Full-time</option>
-                  <option>Part-time</option>
-                  <option>Contract</option>
-                  <option>Internship</option>
-                </select>
-              </div>
-              <div className="flex items-center gap-4">
-                <label className="text-neutral-700">Salary Range:</label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    className="w-[80px] p-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    className="w-[80px] p-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  />
+              <p className="mt-2 text-neutral-800">$100k-$120k</p>
+              <div className="mt-4 text-neutral-600 flex items-center gap-2">
+                <div className="w-[100px] bg-neutral-200 rounded-full h-[8px] overflow-hidden">
+                  <div
+                    className="bg-primary-500 h-full"
+                    style={{ width: "85%" }}
+                  ></div>
                 </div>
+                <span>85% Match</span>
               </div>
-              <button className="px-4 py-2 bg-primary-500 text-white rounded-md">
-                Apply Filters
-              </button>
             </div>
-          </details>
+          ))}
         </section>
-        <main className="flex-1 p-6 space-y-4 overflow-auto">
-          <article className="p-4 bg-neutral-100 rounded-md">
-            <h2 className="text-2xl font-semibold text-neutral-900">
-              Your Matched Jobs:
-            </h2>
-            <div className="p-4 flex flex-col gap-4">
-              {/* 1st Job Listing */}
-              <details className="p-4 bg-white rounded-md border border-neutral-200">
-                <summary className="flex items-center justify-between cursor-pointer">
-                  <div>
-                    <h3 className="text-xl font-medium text-neutral-950">
-                      Software Engineer
-                    </h3>
-                    <p className="text-neutral-700">
-                      Company: TechInnovators Inc.
-                    </p>
-                    <p className="text-neutral-700">Location: New York, NY</p>
-                    <p className="text-neutral-700">
-                      Salary: $120,000 - $150,000
-                    </p>
-                  </div>
-                  <button className="p-2 w-[40px] h-[40px] bg-primary-500 text-white rounded-full">
-                    <span className="material-symbols-outlined">
-                      arrow_forward
-                    </span>
-                  </button>
-                </summary>
-                <div className="mt-4">
-                  <p className="text-neutral-700">
-                    Description: Join a dynamic and innovative team at
-                    TechInnovators Inc. Develop cutting-edge software and manage
-                    solutions with a high impact on our clients.
-                  </p>
-                </div>
-              </details>
-
-              {/* 2nd Job Listing */}
-              <details className="p-4 bg-white rounded-md border border-neutral-200">
-                <summary className="flex items-center justify-between cursor-pointer">
-                  <div>
-                    <h3 className="text-xl font-medium text-neutral-950">
-                      Data Scientist
-                    </h3>
-                    <p className="text-neutral-700">Company: DataSolve</p>
-                    <p className="text-neutral-700">
-                      Location: San Francisco, CA
-                    </p>
-                    <p className="text-neutral-700">
-                      Salary: $110,000 - $140,000
-                    </p>
-                  </div>
-                  <button className="p-2 w-[40px] h-[40px] bg-primary-500 text-white rounded-full">
-                    <span className="material-symbols-outlined">
-                      arrow_forward
-                    </span>
-                  </button>
-                </summary>
-                <div className="mt-4">
-                  <p className="text-neutral-700">
-                    Description: Apply your data science skills to solve
-                    challenging problems and develop predictive models in the
-                    exciting field of machine learning.
-                  </p>
-                </div>
-              </details>
-
-              {/* 3rd Job Listing */}
-              <details className="p-4 bg-white rounded-md border border-neutral-200">
-                <summary className="flex items-center justify-between cursor-pointer">
-                  <div>
-                    <h3 className="text-xl font-medium text-neutral-950">
-                      UX Designer
-                    </h3>
-                    <p className="text-neutral-700">Company: Creativa</p>
-                    <p className="text-neutral-700">Location: Austin, TX</p>
-                    <p className="text-neutral-700">
-                      Salary: $90,000 - $120,000
-                    </p>
-                  </div>
-                  <button className="p-2 w-[40px] h-[40px] bg-primary-500 text-white rounded-full">
-                    <span className="material-symbols-outlined">
-                      arrow_forward
-                    </span>
-                  </button>
-                </summary>
-                <div className="mt-4">
-                  <p className="text-neutral-700">
-                    Description: Work closely with our design team to create
-                    user-friendly and visually appealing experiences for apps
-                    and websites at Creativa.
-                  </p>
-                </div>
-              </details>
-            </div>
-          </article>
-        </main>
+        {/* Load More Button */}
+        <div className="px-8 pb-8">
+          <button className="w-full px-6 py-3 bg-primary-500 text-primary-50 rounded-md hover:bg-primary-600">
+            Load More
+          </button>
+        </div>
       </div>
     </div>
   );
