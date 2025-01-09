@@ -10,7 +10,7 @@ function JobSearch() {
         <section className="p-8 border-b border-neutral-200">
           <div className="flex items-center gap-4">
             <input
-              className="flex-grow max-width width-36 py-3 px-4 bg-neutral-100 rounded-md text-neutral-950 text-lg"
+              className="flex-grow w-full width-36 py-3 px-4 bg-neutral-100 rounded-md text-neutral-950 text-lg"
               placeholder="Search by job title, skill, or company..."
             />
             <button className="py-3 px-6 bg-primary-500 text-primary-50 rounded-md text-lg shadow-sm hover:bg-primary-600">
