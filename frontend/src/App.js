@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Contact from "./pages/contact.js";
 import Home from "./pages/home.js";
 import JobSearch from "./pages/jobsearch.js";
-import IntPrep from "./pages/intprep.js";
+import Login from "./pages/auth/login.js";
 import Navbar from "./components/navbar.js";
 import Footer from "./components/footer.js";
 import "./static/style.css";
@@ -23,11 +23,13 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/jobsearch" element={<JobSearch />} />
+            <Route path="/auth/login" element={<Login />} />
           </Routes>
           <Routes>
             <Route path="/home" element={<Footer />} />
             <Route path="/contact" element={<Footer />} />
             <Route path="/jobsearch" element={<Footer />} />
+            <Route path="/auth/login" element={<Footer />} />
           </Routes>
         </div>
       </div>
