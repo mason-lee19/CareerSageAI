@@ -1,10 +1,9 @@
 import React from "react";
-import "../static/style.css";
 
 function JobSearch() {
   return (
     <div id="webcrumbs">
-      <div className="bg-neutral-500 rounded-lg shadow-lg flex flex-col">
+      <div className="rounded-lg shadow-lg flex flex-col">
         {" "}
         {/* Search Bar Section */}
         <section className="p-8 border-b border-neutral-200">

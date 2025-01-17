@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../static/style.css";
 
 function Navbar() {
   return (
-    <nav>
+    <header className="w-full bg-primary px-8 py-6 text-white flex justify-between items-center rounded-t-lg">
+      <h1 className="text-3xl font-title">CareerSageAI</h1>
+      <nav>
       <ul className="flex gap-6">
         <li>
           <Link to="/home" className="hover:underline">
@@ -22,12 +23,13 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <a href="#" className="hover:underline">
+          <Link to="/auth/login" className="hover:underline">
             Sign In
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
+  </header>
   );
 }
 

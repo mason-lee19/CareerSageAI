@@ -1,15 +1,14 @@
 import React from "react";
-import "../static/style.css";
 
 function Contact() {
   return (
-    <div className="flex flex-col items-center justify-center flex-grow px-6 py-12 bg-neutral-500 min-h-[800px]">
+    <div className="flex flex-col items-center justify-center flex-grow px-6 py-12 min-h-[800px]">
       <h1 className="text-2xl font-bold">Get In Touch</h1>
-      <p className="text-lg text-neutral-600 my-4 w-40 text-center">
+      <p className="text-lg text-neutral-600 my-4 w-[40%] text-center">
         Have any questions or need help? We'd love to hear from you. Drop us a
         message and we'll respond as soon as we can.
       </p>
-      <form className="flex flex-col gap-4 w-40 max-w-md">
+      <form className="flex flex-col gap-4 w-[40%] max-w-md">
         <input
           type="text"
           placeholder="Your Name"
