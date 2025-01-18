@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 function Navbar() {
   return (
@@ -8,22 +8,22 @@ function Navbar() {
       <nav>
       <ul className="flex gap-6">
         <li>
-          <Link to="/home" className="hover:underline">
+          <Link href="/home" className="hover:underline">
             Home
           </Link>
         </li>
         <li>
-          <Link to="/jobsearch" className="hover:underline">
+          <Link href="/jobsearch" className="hover:underline">
             Search Jobs
           </Link>
         </li>
         <li>
-          <Link to="/contact" className="hover:underline">
+          <Link href="/contact" className="hover:underline">
             Contact
           </Link>
         </li>
         <li>
-          <Link to="/auth/login" className="hover:underline">
+          <Link href="/auth/login" className="hover:underline">
             Sign In
           </Link>
         </li>

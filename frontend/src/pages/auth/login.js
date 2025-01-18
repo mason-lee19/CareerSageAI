@@ -1,15 +1,15 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-//import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export default function Login() {
-  //const route = useRouter();
+  const route = useRouter();
   //Sign in with google
   const googleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      //route.push("/home");
+      route.push("/jobsearch");
     } catch (error) {
       console.log(error);
     }

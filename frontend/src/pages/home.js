@@ -3,6 +3,10 @@ import React from "react";
 function Home() {
   return (
     <main className="px-8 py-12 flex-1 flex flex-col justify-center items-center">
+      <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet"
+        />
       <section
         id="hero"
         className="h-[400px] relative flex items-center justify-center text-center"
