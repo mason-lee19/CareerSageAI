@@ -3,6 +3,10 @@ import React from "react";
 function JobSearch() {
   return (
     <div id="webcrumbs">
+      <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet"
+        />
       <div className="rounded-lg shadow-lg flex flex-col">
         {" "}
         {/* Search Bar Section */}
