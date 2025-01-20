@@ -1,7 +1,11 @@
-import React from "react";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../utils/firebase";
 
-function Navbar() {
+export default function Navbar() {
+  const [user, loading] = useAuthState(auth);
+
+
   return (
     <header className="w-full bg-primary px-8 py-6 text-white flex justify-between items-center rounded-t-lg">
       <h1 className="text-3xl font-title">CareerSageAI</h1>
@@ -23,14 +27,19 @@ function Navbar() {
           </Link>
         </li>
         <li>
+          {!user && (
           <Link href="/auth/login" className="hover:underline">
             Sign In
           </Link>
+          )}
+          {user && (
+            <Link href="/user-settings">
+              <img src={user.photoURL}/>
+            </Link>
+          )}
         </li>
       </ul>
     </nav>
   </header>
   );
-}
-
-export default Navbar;
+};

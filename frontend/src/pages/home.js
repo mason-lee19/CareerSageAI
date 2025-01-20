@@ -71,7 +71,7 @@ function Home() {
 
       <section id="how-it-works" className="py-16 bg-white w-full">
         <div className="mx-auto px-8">
-          <h3 className="text-2xl font-title text-center mb-12">
+          <h3 className="text-3xl font-title text-center mb-12">
             How it works
           </h3>
           <div className="h-[150px] mb-12 text-center px-8 grid grid-cols-3 items-center justify-center gap-32">
@@ -106,7 +106,7 @@ function Home() {
       </section>
 
       <section id="testimonials" className="py-16">
-        <h3 className="text-2xl font-title text-center mb-12">
+        <h3 className="text-3xl font-title text-center mb-12">
           What Our Users Say
         </h3>
         <div className="flex gap-32">
