@@ -34,7 +34,7 @@ export default function Navbar() {
           )}
           {user && (
             <Link href="/user-settings">
-              <img src={user.photoURL}/>
+              <img className='w-6 rounded-full cursor-pointer' src={user.photoURL}/>
             </Link>
           )}
         </li>
