@@ -1,8 +1,11 @@
 import React from "react";
-import Lottie from "react-lottie-player";
+//import Lottie from "react-lottie-player";
 import animationData from "../../assets/getting-started.json"
+import dynamic from 'next/dynamic';
 
-function Home() {
+const Lottie = dynamic(()=> import('react-lottie-player'),{ssr:false});
+
+export default function Home() {
   return (
     <main className="px-8 flex-1 flex flex-col justify-center items-center">
       <link
@@ -42,7 +45,7 @@ function Home() {
         <div className="grid grid-cols-3 gap-6">
     	    <div className="border border-neutral-200 rounded-md p-8 bg-white">
     	      <div className="flex justify-center mb-6">
-            <span className="material-symbols-outlined text-primary-500 text-6xl py-6">
+            <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                 Check
               </span>
     	      </div>
@@ -64,7 +67,7 @@ function Home() {
     	    </div>
     	    <div className="border border-neutral-200 rounded-md p-8 bg-white">
     	      <div className="flex justify-center mb-6">
-            <span className="material-symbols-outlined text-primary-500 text-6xl py-6">
+            <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                 Sliders
               </span>
     	      </div>
@@ -86,7 +89,7 @@ function Home() {
     	    </div>
     	    <div className="border border-neutral-200 rounded-md p-8 bg-white">
     	      <div className="flex justify-center mb-6">
-            <span className="material-symbols-outlined text-primary-500 text-6xl py-6">
+            <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                 Partner_Reports
               </span>
     	      </div>
@@ -106,14 +109,14 @@ function Home() {
       </section>
 
       <section id="getting-started" className="bg-neutral-50 py-16 w-screen min-h-screen">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <h3 className="text-4xl font-title text-center mb-12">
             Getting Started
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-8">
             <div className="flex flex-col gap-12">
               <div className="bg-white border border-neutral-300 px-6 py-6 mx-auto w-full max-w-md shadow-md">
-                <span className="material-symbols-outlined text-primary-500 text-6xl py-6">
+                <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                   account_circle
                 </span>
                 <h4 className="text-xl font-semibold mb-2">
@@ -122,14 +125,14 @@ function Home() {
                 <p>Sign up and tell us about yourself.</p>
               </div>
               <div className="bg-white border border-neutral-300 px-6 py-6 mx-auto w-full max-w-md shadow-md">
-                <span className="material-symbols-outlined text-primary-500 text-6xl py-6">
+                <span className="material-symbols-outlined text-primary-500 !text-3xl py-6">
                   Upload
                 </span>
                 <h4 className="text-xl font-semibold mb-2">Upload your resume</h4>
                 <p>Let our algorithms analyze your skills and experiences.</p>
               </div>
               <div className="bg-white border border-neutral-300 px-6 py-6 mx-auto w-full max-w-md shadow-md">
-                <span className="material-symbols-outlined text-primary-500 text-6xl py-6">
+                <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                   Search
                 </span>
                 <h4 className="text-xl font-semibold mb-2">Find your matches</h4>
@@ -179,5 +182,3 @@ function Home() {
     </main>
   );
 }
-
-export default Home;
