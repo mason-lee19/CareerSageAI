@@ -11,7 +11,7 @@ function Home() {
         />
       <section
         id="hero"
-        className="min-h-screen relative flex items-center justify-center text-center"
+        className="w-screen min-h-screen relative flex items-center justify-center text-center"
       >
         <div className="absolute inset-0 bg-cover"></div>
         <div className="relative z-10 px-6">

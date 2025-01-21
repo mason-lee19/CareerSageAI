@@ -7,7 +7,7 @@ export default function Navbar() {
 
 
   return (
-    <header className="w-full bg-primary px-8 py-6 text-white flex justify-between items-center rounded-t-lg">
+    <header className="w-full bg-primary px-8 py-6 text-white flex justify-between items-center">
       <h1 className="text-3xl font-title">CareerSageAI</h1>
       <nav>
       <ul className="flex gap-6">

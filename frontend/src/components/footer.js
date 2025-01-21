@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-full bg-neutral-900 text-white py-6 text-center mt-auto rounded-b-lg">
+    <footer className="w-full text-primary-500 py-6 text-center mt-auto">
       <p>© 2024 CareerSage. All Rights Reserved.</p>
       <div className="flex justify-center gap-4 mt-2">
         <a href="#">
