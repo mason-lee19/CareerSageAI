@@ -43,71 +43,36 @@ export default function Navbar() {
           {user && (
             <button onClick={toggleSettings}>
               <img className='w-6 rounded-full cursor-pointer' src={user.photoURL}/>
+              {isSettingsOpen && (
+                <div className="absolute right-2 mt-8 gap-8 bg-white shadow-lg rounded-md z-20">
+                  <div className="p-4">
+                    {/* Go To Settings */}
+                    <div className="flex justify-center mb-4">
+                      <Link
+                        href="/settings"
+                        className="text-gray-800 px-4 hover:text-gray-100 transition-colors"
+                      >
+                        Settings
+                      </Link>
+                    </div>
+                    <hr className="my-2 border-t border-gray-300" />
+                    {/* Log Off */}
+                    <div className="flex justify-center">
+                      <button
+                        className="text-gray-800 px-4 hover:text-gray-100 transition-colors"
+                        // Add log-off function
+                      >
+                    Log Off
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
             </button>
           )}
         </li>
       </ul>
     </nav>
-
-    {/*Settings Page*/}
-    <div
-            className={`absolute top-0 right-0 w-1/4 shadow-lg transform ${
-            isSettingsOpen ? "translate-x-0" : "hidden"
-            } transition-transform duration-300`}
-        >
-      <div className="flex items-center justify-between py-6 p-4 bg-gray-500 rounded-tl-lg">
-        <h2 className="text-lg font-semibold">Settings</h2>
-        <h2 className="text-2xl text-gray-500">-</h2>
-        <button
-            onClick={toggleSettings}
-            className="text-gray-200 hover:text-black px-4"
-        >
-            ✕
-        </button>
-        </div>
-        <div className="p-4 overflow-y-auto bg-white text-black rounded-bl-lg">
-        {/*General Settings*/}
-        <h3 className="text-2xl font-semibold mb-4">General Settings</h3>
-        <div className="space-y-3">
-            <div>
-            <label className="block text-gray-700">Theme:</label>
-            <select
-                value={theme}
-                onChange={(e) => setTheme(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-                <option value="Light">Light</option>
-                <option value="Dark">Dark</option>
-            </select>
-            </div>
-        </div>
-        {/*Account Settings*/}
-        <hr className="my-6 border-t border-gray-300" />
-
-        <div className="mb-6">
-            <h3 className="text-2xl font-semibold mb-4">Account Settings</h3>
-            <div className="space-y-3">
-            <div>
-                <label className="block text-gray-700">Username:</label>
-                <input
-                type="text"
-                placeholder="Enter your username"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-            </div>
-
-            <div>
-                <label className="block text-gray-700">Email:</label>
-                <input
-                type="email"
-                placeholder="Enter your email"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </header>
   );
 };
