@@ -52,7 +52,7 @@ export default function Navbar() {
     {/*Settings Page*/}
     <div
             className={`absolute top-0 right-0 w-1/4 shadow-lg transform ${
-            isSettingsOpen ? "translate-x-0" : "translate-x-full"
+            isSettingsOpen ? "translate-x-0" : "hidden"
             } transition-transform duration-300`}
         >
       <div className="flex items-center justify-between py-6 p-4 bg-gray-500 rounded-tl-lg">
