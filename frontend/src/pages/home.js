@@ -52,15 +52,24 @@ export default function Home() {
     	      <ul className="text-neutral-950 text-sm">
     	        <li className="mb-2 flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          Compatible with Playwright, Puppeteer or Selenium.
+                <p className="text-sm">
+                  <span className="font-bold">Tailored Matches: </span> 
+                  Find jobs that perfectly fit your skills and experience.
+                </p>
     	        </li>
     	        <li className="mb-2 flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          Integrate without changing any of your existing code! Just point it at our browsers.
+                <p className="text-sm">
+                  <span className="font-bold">Seamless Setup: </span> 
+                  Just upload your resume - AI does the rest.
+                </p>
     	        </li>
     	        <li className="flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          Connect natively using the Chrome DevTools Protocol.
+                <p className="text-sm">
+                  <span className="font-bold">Smart Insights: </span> 
+                  Real-time matching with thousands of listings.
+                </p>
     	        </li>
     	      </ul>
     	    </div>
@@ -74,15 +83,24 @@ export default function Home() {
     	      <ul className="text-neutral-950 text-sm">
     	        <li className="mb-2 flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          Spin up 1000s of browsers in milliseconds.
+    	          <p className="text-sm">
+                  <span className="font-bold">Fit Scores: </span> 
+                  See how well you match each job at a glance.
+                </p>
     	        </li>
     	        <li className="mb-2 flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          Serverless infrastructure means you don't need to wait.
+    	          <p className="text-sm">
+                  <span className="font-bold">Data-Driven Insights: </span> 
+                  Scores are based on you skills, experience, and job requirements.
+                </p>
     	        </li>
     	        <li className="flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          We'll do the heavy lifting - run your code anywhere.
+    	          <p className="text-sm">
+                  <span className="font-bold">Streamlined results: </span> 
+                  Quickly identify the best opportunities for you.
+                </p>
     	        </li>
     	      </ul>
     	    </div>
@@ -96,11 +114,17 @@ export default function Home() {
     	      <ul className="text-neutral-950 text-sm">
     	        <li className="mb-2 flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          Globally located browsers to minimize latency between the browser and your users.
+    	          <p className="text-sm">
+                  <span className="font-bold">Undestand Job Trends: </span> 
+                  Identify the most common keywords and requirments for specific roles.
+                </p>
     	        </li>
     	        <li className="flex items-start">
     	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          4 vCPUs for each browser means pages load lightning fast!
+    	          <p className="text-sm">
+                  <span className="font-bold">Stay Competitive: </span> 
+                  Align your resume with the expectations of your target position.
+                </p>
     	        </li>
     	      </ul>
     	    </div>
