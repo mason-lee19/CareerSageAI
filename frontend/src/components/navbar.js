@@ -60,7 +60,7 @@ export default function Navbar() {
         <h2 className="text-2xl text-gray-500">-</h2>
         <button
             onClick={toggleSettings}
-            className="text-gray-200 hover:text-black"
+            className="text-gray-200 hover:text-black px-4"
         >
             ✕
         </button>
