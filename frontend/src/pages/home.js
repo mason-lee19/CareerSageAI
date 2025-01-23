@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import animationData from "../../assets/getting-started.json"
 import dynamic from 'next/dynamic';
 
@@ -24,12 +25,12 @@ export default function Home() {
             Upload your resume, and let our smart algorithms find your perfect
             job matches with a match score.
           </p>
-          <a
-            href="#how-it-works"
+          <Link
+            href="/auth/login"
             className="text-white bg-primary px-6 py-3 rounded-md text-lg"
           >
             Get Started Now
-          </a>
+          </Link>
           
         </div>
         

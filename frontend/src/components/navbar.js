@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../utils/firebase";
-
-import { useState } from "react";
+import { useState } from "react"
 
 export default function Navbar() {
   const [user, loading] = useAuthState(auth);
-  const [theme, setTheme] = useState('Light');
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -60,9 +58,9 @@ export default function Navbar() {
                     <div className="flex justify-center">
                       <button
                         className="text-gray-800 px-4 hover:text-gray-100 transition-colors"
-                        // Add log-off function
+                        onClick={() => auth.signOut()}
                       >
-                    Log Off
+                    Sign Out
                   </button>
                 </div>
               </div>
