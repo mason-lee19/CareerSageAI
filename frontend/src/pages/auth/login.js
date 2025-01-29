@@ -19,12 +19,12 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if(user){
-      route.push("/jobsearch");
+    if (user) {
+      route.push("/settings");
     } else {
       console.log("login");
     }
-  },[user]);
+  }, [user]);
 
   return (
     <div className="flex flex-col items-center justify-center flex-grow px-6 py-12 min-h-[800px]">
