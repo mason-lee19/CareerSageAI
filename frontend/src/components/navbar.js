@@ -26,7 +26,7 @@ export default function Navbar() {
 
   return (
     <header className="w-full bg-primary px-8 py-6 text-white flex justify-between items-center">
-      <h1 className="text-2xl font-title">CareerSageAI</h1>
+      <h1 className="text-2xl font-title">CareerSage</h1>
       <nav>
         <ul className="flex gap-6">
           <li>

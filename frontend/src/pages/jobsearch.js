@@ -2,11 +2,11 @@ import React from "react";
 
 function JobSearch() {
   return (
-    <div id="webcrumbs">
+    <div>
       <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-          rel="stylesheet"
-        />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        rel="stylesheet"
+      />
       <div className="rounded-lg shadow-lg flex flex-col">
         {" "}
         {/* Search Bar Section */}
@@ -20,7 +20,7 @@ function JobSearch() {
               Search
             </button>
           </div>
-          <div className="mt-4 flex gap-4">
+          <div className="mt-4 flex flex-wrap gap-4 sm:grid sm:grid-cols-2 lg:flex">
             {/* Filters */}
             <select className="py-2 px-4 bg-neutral-100 rounded-md text-neutral-950 text-sm">
               <option>Location</option>
@@ -46,7 +46,7 @@ function JobSearch() {
           </div>
         </section>
         {/* AI Assistant Section */}
-        <aside className="relative mt-8 p-8 bg-neutral-100 rounded-md flex items-start gap-4">
+        <aside className="relative m-8 p-8 bg-neutral-100 rounded-md flex items-start gap-4">
           <span className="material-symbols-outlined text-primary-500">
             chat
           </span>
@@ -56,7 +56,7 @@ function JobSearch() {
           </p>
         </aside>
         {/* Job Results Section */}
-        <section className="flex-1 p-8 grid grid-cols-3 gap-6">
+        <section className="flex-1 p-8 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, index) => (
             <div
               key={index}

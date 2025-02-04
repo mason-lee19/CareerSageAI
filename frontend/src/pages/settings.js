@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import ProfileTab from "../components/tabs/ProfileTab";
-import BillingTab from "../components/tabs/BillingTab";
-import NotificationTab from "../components/tabs/NotificationsTab";
+import ProfileTab from "../components/settings/ProfileTab";
+import BillingTab from "../components/settings/BillingTab";
+import NotificationTab from "../components/settings/NotificationsTab";
 
 const UserSettings = () => {
   const [activeTab, setActiveTab] = useState("profile");
