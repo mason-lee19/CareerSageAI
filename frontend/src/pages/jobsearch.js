@@ -19,7 +19,7 @@ function JobSearch() {
               className="flex-grow w-full width-36 py-3 px-4 bg-neutral-100 rounded-md text-neutral-950 text-lg"
               placeholder="Search by job title, skill, or company..."
             />
-            <button className="py-3 px-6 bg-primary-500 text-primary-50 rounded-md text-lg shadow-sm hover:bg-primary-600">
+            <button className="py-3 px-6 rounded-md bg-black py-4 text-white transition-all hover:bg-gray-600">
               Search
             </button>
           </div>
@@ -68,7 +68,7 @@ function JobSearch() {
             </div>
             {/* Load More Button */}
             <div className="px-8 flex justify-center">
-              <button className="px-32 py-3 bg-primary-500 text-primary-50 rounded-md hover:bg-primary-600">
+              <button className="px-32 py-3 rounded-md bg-black py-4 text-white transition-all hover:bg-gray-600">
                 Load More
               </button>
             </div>

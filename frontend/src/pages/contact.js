@@ -4,7 +4,7 @@ function Contact() {
   return (
     <div className="flex flex-col items-center justify-center flex-grow px-6 py-12 min-h-[800px]">
       <h1 className="text-2xl font-bold">Get In Touch</h1>
-      <p className="text-lg text-neutral-600 my-4 w-[40%] text-center">
+      <p className="text-lg text-black my-4 w-[40%] text-center">
         Have any questions or need help? We'd love to hear from you. Drop us a
         message and we'll respond as soon as we can.
       </p>
@@ -25,7 +25,7 @@ function Contact() {
         />
         <button
           type="submit"
-          className="bg-primary-500 text-white py-2 px-6 rounded-md mt-4"
+          className="py-2 px-6 rounded-md mt-4 bg-black py-4 text-white transition-all hover:bg-gray-600"
         >
           Send Message
         </button>

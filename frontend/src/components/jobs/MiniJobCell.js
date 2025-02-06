@@ -14,7 +14,7 @@ export default function MiniJobCell({
   return (
     <div
       key={index}
-      className="bg-white p-4 rounded-3xl space-y-4 hover:shadow-lg transition-all duration-300"
+      className="bg-white p-4 rounded-3xl space-y-4 hover:shadow-xl hover:bg-gray-300 transition-all duration-300"
     >
       <div className="flex justify-between items-start">
         <div className="flex gap-3">

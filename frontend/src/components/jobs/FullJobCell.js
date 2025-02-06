@@ -9,7 +9,8 @@ export default function FullJobCell({
   contractType,
   experience,
   pay,
-  requirements,
+  fullRequirements,
+  companyDesc,
 }) {
   return (
     <div className="min-h-screen bg-white p-8 m-8 rounded-3xl bg-white p-8">
@@ -46,7 +47,7 @@ export default function FullJobCell({
       </div>
       <div className="mt-8 flex gap-8">
         <details className="group flex-1" open>
-          <summary className="cursor-pointer rounded-xl bg-gray-900 px-4 py-2 text-white">
+          <summary className="cursor-pointer rounded-xl bg-gray-100 px-4 py-2">
             Description
           </summary>
           <div className="mt-4 space-y-2 text-sm text-gray-600">
@@ -76,6 +77,28 @@ export default function FullJobCell({
           <summary className="cursor-pointer rounded-xl bg-gray-100 px-4 py-2">
             Company
           </summary>
+          <div className="mt-4 space-y-2 text-sm text-gray-600">
+            <p>
+              • Collaborates with the Digital Marketing team to propose, design
+              & deliver wireframes, user journeys and UI mock-ups
+            </p>
+            <p>
+              • Collaborate with the UX/Ui Content team to establish best
+              practices for high-performing interfaces
+            </p>
+            <p>
+              • Collaborate with Front-End Developers to ensure high quality &
+              bug-free deliverables
+            </p>
+            <p>
+              • Design high-fidelity UI prototypes for responsive websites &
+              maintain consistency of our design guidelines
+            </p>
+            <p>
+              • Keep up-to-date with the latest UI/UX & web design trends so as
+              to propose improvements on current websites
+            </p>
+          </div>
         </details>
       </div>
       <div className="mt-8">
@@ -112,7 +135,7 @@ export default function FullJobCell({
           <li>• Knowledge in HTML, CSS, JavaScript & WordPress builds</li>
         </ul>
       </div>
-      <button className="mt-8 w-full rounded-xl bg-gray-900 py-4 text-white transition-all hover:bg-gray-800">
+      <button className="mt-8 w-full rounded-xl bg-black py-4 text-white transition-all hover:bg-gray-600">
         Apply Now
       </button>
     </div>
