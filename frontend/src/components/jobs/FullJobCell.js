@@ -135,7 +135,7 @@ export default function FullJobCell({
           <li>• Knowledge in HTML, CSS, JavaScript & WordPress builds</li>
         </ul>
       </div>
-      <button className="mt-8 w-full rounded-xl bg-black py-4 text-white transition-all hover:bg-gray-600">
+      <button className="mt-8 w-full rounded-xl bg-primary py-4 text-white transition-all hover:bg-gray-600">
         Apply Now
       </button>
     </div>

@@ -16,10 +16,10 @@ function JobSearch() {
         <section className="p-8 border-b border-neutral-200">
           <div className="flex items-center gap-4">
             <input
-              className="flex-grow w-full width-36 py-3 px-4 bg-neutral-100 rounded-md text-neutral-950 text-lg"
+              className="flex-grow w-full py-3 px-4 bg-neutral-100 rounded-md text-neutral-950 text-lg"
               placeholder="Search by job title, skill, or company..."
             />
-            <button className="py-3 px-6 rounded-md bg-black py-4 text-white transition-all hover:bg-gray-600">
+            <button className="py-3 px-6 rounded-md bg-primary text-white transition-all hover:bg-gray-600">
               Search
             </button>
           </div>
@@ -68,7 +68,7 @@ function JobSearch() {
             </div>
             {/* Load More Button */}
             <div className="px-8 flex justify-center">
-              <button className="px-32 py-3 rounded-md bg-black py-4 text-white transition-all hover:bg-gray-600">
+              <button className="px-32 py-3 rounded-md bg-primary py-4 text-white transition-all hover:bg-gray-600">
                 Load More
               </button>
             </div>

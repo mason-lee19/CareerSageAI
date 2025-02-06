@@ -1,17 +1,17 @@
 import React from "react";
 import Link from "next/link";
-import animationData from "../../assets/getting-started.json"
-import dynamic from 'next/dynamic';
+import animationData from "../../assets/getting-started.json";
+import dynamic from "next/dynamic";
 
-const Lottie = dynamic(()=> import('react-lottie-player'),{ssr:false});
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 export default function Home() {
   return (
     <main className="px-8 flex-1 flex flex-col justify-center items-center">
       <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-          rel="stylesheet"
-        />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        rel="stylesheet"
+      />
       <section
         id="hero"
         className="w-screen min-h-screen relative flex items-center justify-center text-center"
@@ -27,112 +27,144 @@ export default function Home() {
           </p>
           <Link
             href="/auth/login"
-            className="text-white bg-primary px-6 py-3 rounded-md text-lg"
+            className="text-black bg-primary px-6 py-3 rounded-md text-lg transition-colors hover:bg-gray-600"
           >
             Get Started Now
           </Link>
-          
         </div>
-        
       </section>
       <div className="bottom-0 w-full px-4 pb-4 text-neutral-500 flex justify-between items-center">
-        <span className="absolute left-4 bottom-4">Scroll to discover CareerSage</span>
-        <span className="material-symbols-outlined absolute right-4 bottom-4">arrow_downward</span>
+        <span className="absolute left-4 bottom-4">
+          Scroll to discover CareerSage
+        </span>
+        <span className="material-symbols-outlined absolute right-4 bottom-4">
+          arrow_downward
+        </span>
       </div>
 
-      <section className='min-h-[600px]'>
-        <h2 className="text-4xl font-title text-neutral-950 text-center mb-12">Features</h2>
+      <section className="min-h-[600px]">
+        <h2 className="text-4xl font-title text-neutral-950 text-center mb-12">
+          Features
+        </h2>
         <div className="grid grid-cols-3 gap-6">
-    	    <div className="border border-neutral-200 rounded-md p-8 bg-white">
-    	      <div className="flex justify-center mb-6">
-            <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
+          <div className="border border-neutral-200 rounded-md p-8 bg-white">
+            <div className="flex justify-center mb-6">
+              <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                 Check
               </span>
-    	      </div>
-    	      <h3 className="text-lg font-bold text-neutral-950 mb-4">AI-Powered Matching</h3>
-    	      <ul className="text-neutral-950 text-sm">
-    	        <li className="mb-2 flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
+            </div>
+            <h3 className="text-lg font-bold text-neutral-950 mb-4">
+              AI-Powered Matching
+            </h3>
+            <ul className="text-neutral-950 text-sm">
+              <li className="mb-2 flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
                 <p className="text-sm">
-                  <span className="font-bold">Tailored Matches: </span> 
+                  <span className="font-bold">Tailored Matches: </span>
                   Find jobs that perfectly fit your skills and experience.
                 </p>
-    	        </li>
-    	        <li className="mb-2 flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
+              </li>
+              <li className="mb-2 flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
                 <p className="text-sm">
-                  <span className="font-bold">Seamless Setup: </span> 
+                  <span className="font-bold">Seamless Setup: </span>
                   Just upload your resume - AI does the rest.
                 </p>
-    	        </li>
-    	        <li className="flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
+              </li>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
                 <p className="text-sm">
-                  <span className="font-bold">Smart Insights: </span> 
+                  <span className="font-bold">Smart Insights: </span>
                   Real-time matching with thousands of listings.
                 </p>
-    	        </li>
-    	      </ul>
-    	    </div>
-    	    <div className="border border-neutral-200 rounded-md p-8 bg-white">
-    	      <div className="flex justify-center mb-6">
-            <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
+              </li>
+            </ul>
+          </div>
+          <div className="border border-neutral-200 rounded-md p-8 bg-white">
+            <div className="flex justify-center mb-6">
+              <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                 Sliders
               </span>
-    	      </div>
-    	      <h3 className="text-lg font-bold text-neutral-950 mb-4">Match Scoring</h3>
-    	      <ul className="text-neutral-950 text-sm">
-    	        <li className="mb-2 flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          <p className="text-sm">
-                  <span className="font-bold">Fit Scores: </span> 
+            </div>
+            <h3 className="text-lg font-bold text-neutral-950 mb-4">
+              Match Scoring
+            </h3>
+            <ul className="text-neutral-950 text-sm">
+              <li className="mb-2 flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
+                <p className="text-sm">
+                  <span className="font-bold">Fit Scores: </span>
                   See how well you match each job at a glance.
                 </p>
-    	        </li>
-    	        <li className="mb-2 flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          <p className="text-sm">
-                  <span className="font-bold">Data-Driven Insights: </span> 
-                  Scores are based on you skills, experience, and job requirements.
+              </li>
+              <li className="mb-2 flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
+                <p className="text-sm">
+                  <span className="font-bold">Data-Driven Insights: </span>
+                  Scores are based on you skills, experience, and job
+                  requirements.
                 </p>
-    	        </li>
-    	        <li className="flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          <p className="text-sm">
-                  <span className="font-bold">Streamlined results: </span> 
+              </li>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
+                <p className="text-sm">
+                  <span className="font-bold">Streamlined results: </span>
                   Quickly identify the best opportunities for you.
                 </p>
-    	        </li>
-    	      </ul>
-    	    </div>
-    	    <div className="border border-neutral-200 rounded-md p-8 bg-white">
-    	      <div className="flex justify-center mb-6">
-            <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
+              </li>
+            </ul>
+          </div>
+          <div className="border border-neutral-200 rounded-md p-8 bg-white">
+            <div className="flex justify-center mb-6">
+              <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                 Partner_Reports
               </span>
-    	      </div>
-    	      <h3 className="text-lg font-bold text-neutral-950 mb-4">Keyword Insights</h3>
-    	      <ul className="text-neutral-950 text-sm">
-    	        <li className="mb-2 flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          <p className="text-sm">
-                  <span className="font-bold">Undestand Job Trends: </span> 
-                  Identify the most common keywords and requirments for specific roles.
+            </div>
+            <h3 className="text-lg font-bold text-neutral-950 mb-4">
+              Keyword Insights
+            </h3>
+            <ul className="text-neutral-950 text-sm">
+              <li className="mb-2 flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
+                <p className="text-sm">
+                  <span className="font-bold">Undestand Job Trends: </span>
+                  Identify the most common keywords and requirments for specific
+                  roles.
                 </p>
-    	        </li>
-    	        <li className="flex items-start">
-    	          <span className="material-symbols-outlined text-red-500 mr-2">check_circle</span>
-    	          <p className="text-sm">
-                  <span className="font-bold">Stay Competitive: </span> 
-                  Align your resume with the expectations of your target position.
+              </li>
+              <li className="flex items-start">
+                <span className="material-symbols-outlined text-red-500 mr-2">
+                  check_circle
+                </span>
+                <p className="text-sm">
+                  <span className="font-bold">Stay Competitive: </span>
+                  Align your resume with the expectations of your target
+                  position.
                 </p>
-    	        </li>
-    	      </ul>
-    	    </div>
-                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      <section id="getting-started" className="bg-neutral-50 py-16 w-screen min-h-screen">
+      <section
+        id="getting-started"
+        className="bg-neutral-50 py-16 w-screen min-h-screen"
+      >
         <div className="container mx-auto">
           <h3 className="text-4xl font-title text-center mb-12">
             Getting Started
@@ -152,14 +184,18 @@ export default function Home() {
                 <span className="material-symbols-outlined text-primary-500 !text-3xl py-6">
                   Upload
                 </span>
-                <h4 className="text-xl font-semibold mb-2">Upload your resume</h4>
+                <h4 className="text-xl font-semibold mb-2">
+                  Upload your resume
+                </h4>
                 <p>Let our algorithms analyze your skills and experiences.</p>
               </div>
               <div className="bg-white border border-neutral-300 rounded-md px-6 py-6 mx-auto w-full max-w-md shadow-md">
                 <span className="material-symbols-outlined text-primary-500 !text-4xl py-6">
                   Search
                 </span>
-                <h4 className="text-xl font-semibold mb-2">Find your matches</h4>
+                <h4 className="text-xl font-semibold mb-2">
+                  Find your matches
+                </h4>
                 <p>
                   Search for jobs based on your skills and keywords, and see a
                   match score for each job.
