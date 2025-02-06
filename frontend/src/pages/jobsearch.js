@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { searchJobs } from "../api";
 
 import MiniJobCell from "../components/jobs/MiniJobCell";
 import FullJobCell from "../components/jobs/FullJobCell";
 
 function JobSearch() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const handleSearch = async () => {
+    const data = await searchJobs(query);
+    setResults(data.results);
+  };
+
+  console.log();
+
   return (
     <div>
       <link
@@ -18,8 +29,13 @@ function JobSearch() {
             <input
               className="flex-grow w-full py-3 px-4 bg-neutral-100 rounded-md text-neutral-950 text-lg"
               placeholder="Search by job title, skill, or company..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
-            <button className="py-3 px-6 rounded-md bg-primary text-white transition-all hover:bg-gray-600">
+            <button
+              className="py-3 px-6 rounded-md bg-primary text-white transition-all hover:bg-gray-600"
+              onClick={handleSearch}
+            >
               Search
             </button>
           </div>
@@ -52,17 +68,17 @@ function JobSearch() {
         <div className="grid grid-cols-[1fr_2fr]">
           <section className="gap-6">
             <div className="gap-6 flex-1 p-8 grid grid-cols-1">
-              {[...Array(3)].map((_, index) => (
+              {results.map((job, index) => (
                 <MiniJobCell
                   index={index}
-                  company="Temp Company"
-                  jobTitle="Data Engineer"
-                  location="Menlo Park, CA"
+                  company={job.company}
+                  jobTitle={job.title}
+                  location={job.location}
                   contractType="Full-Time"
                   experience="3-5 Years"
-                  pay="$100,000 - $120,000"
-                  requirements="Bachelor's degree in Engineering or similar, ETL design, at least 1 year of AWS experience"
-                  matchPercent="51%"
+                  pay={job.salary}
+                  requirements={job.details}
+                  matchPercent="81%"
                 />
               ))}
             </div>

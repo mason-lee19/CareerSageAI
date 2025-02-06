@@ -27,7 +27,7 @@ export default function Home() {
           </p>
           <Link
             href="/auth/login"
-            className="text-black bg-primary px-6 py-3 rounded-md text-lg transition-colors hover:bg-gray-600"
+            className="text-white bg-primary px-6 py-3 rounded-md text-lg transition-colors hover:bg-gray-600"
           >
             Get Started Now
           </Link>

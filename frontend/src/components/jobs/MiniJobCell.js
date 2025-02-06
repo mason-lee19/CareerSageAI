@@ -44,7 +44,9 @@ export default function MiniJobCell({
         </span>
       </div>
 
-      <p className="text-sm text-gray-600">Requirements : {requirements}</p>
+      <p className="text-sm text-gray-600">
+        Requirements : {requirements.substring(0, 200)}
+      </p>
 
       <div className="flex justify-between items-center pt-2">
         <div className="flex items-center gap-2">
