@@ -7,10 +7,15 @@ import FullJobCell from "../components/jobs/FullJobCell";
 function JobSearch() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
 
   const handleSearch = async () => {
     const data = await searchJobs(query);
     setResults(data.results);
+  };
+
+  const handleJobClick = (job) => {
+    setSelectedJob(job);
   };
 
   console.log();
@@ -69,17 +74,9 @@ function JobSearch() {
           <section className="gap-6">
             <div className="gap-6 flex-1 p-8 grid grid-cols-1">
               {results.map((job, index) => (
-                <MiniJobCell
-                  index={index}
-                  company={job.company}
-                  jobTitle={job.title}
-                  location={job.location}
-                  contractType="Full-Time"
-                  experience="3-5 Years"
-                  pay={job.salary}
-                  requirements={job.details}
-                  matchPercent="81%"
-                />
+                <div onClick={() => handleJobClick(job)}>
+                  <MiniJobCell index={index} job={job} />
+                </div>
               ))}
             </div>
             {/* Load More Button */}
@@ -90,15 +87,7 @@ function JobSearch() {
             </div>
           </section>
           <div className="gap-6">
-            <FullJobCell
-              company="Temp Company"
-              jobTitle="Data Engineer"
-              location="Menlo Park, CA"
-              remoteStatus="onsite"
-              contractType="Full-Time"
-              experience="3-5 Years"
-              pay="$100,000 - $120,000"
-            />
+            {selectedJob && <FullJobCell job={selectedJob} />}
           </div>
         </div>
       </div>

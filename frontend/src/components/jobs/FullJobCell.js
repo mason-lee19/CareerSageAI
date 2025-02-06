@@ -1,17 +1,14 @@
 import React from "react";
 
-export default function FullJobCell({
-  index,
-  company,
-  jobTitle,
-  location,
-  remoteStatus,
-  contractType,
-  experience,
-  pay,
-  fullRequirements,
-  companyDesc,
-}) {
+export default function FullJobCell({ job }) {
+  const remoteStatus = "Remote";
+  const contractType = "Full-Time";
+  const experience = "3-5 Years";
+
+  const handleClick = () => {
+    window.open(job.url, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="min-h-screen bg-white p-8 m-8 rounded-3xl bg-white p-8">
       <header className="flex items-center justify-between">
@@ -21,10 +18,10 @@ export default function FullJobCell({
           className="h-12 w-12 rounded-xl"
         />
         <div className="flex flex-grow flex-col px-4">
-          <h1 className="text-xl font-bold">{company}</h1>
-          <p className="text-sm text-gray-500">{jobTitle}</p>
+          <h1 className="text-xl font-bold">{job.company}</h1>
+          <p className="text-sm text-gray-500">{job.title}</p>
           <p className="text-xs text-gray-400">
-            {location} • {remoteStatus}
+            {job.location} • {remoteStatus}
           </p>
         </div>
         <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-gray-100 transition-all hover:bg-gray-200">
@@ -34,7 +31,7 @@ export default function FullJobCell({
       <div className="mt-8 flex gap-4">
         <div className="rounded-xl bg-green-100 px-4 py-2">
           <p className="text-xs text-gray-500">Salary</p>
-          <p className="font-semibold">{pay}</p>
+          <p className="font-semibold">{job.salary}</p>
         </div>
         <div className="rounded-xl bg-blue-100 px-4 py-2">
           <p className="text-xs text-gray-500">Job Type</p>
@@ -51,28 +48,10 @@ export default function FullJobCell({
             Description
           </summary>
           <div className="mt-4 space-y-2 text-sm text-gray-600">
-            <p>
-              • Collaborates with the Digital Marketing team to propose, design
-              & deliver wireframes, user journeys and UI mock-ups
-            </p>
-            <p>
-              • Collaborate with the UX/Ui Content team to establish best
-              practices for high-performing interfaces
-            </p>
-            <p>
-              • Collaborate with Front-End Developers to ensure high quality &
-              bug-free deliverables
-            </p>
-            <p>
-              • Design high-fidelity UI prototypes for responsive websites &
-              maintain consistency of our design guidelines
-            </p>
-            <p>
-              • Keep up-to-date with the latest UI/UX & web design trends so as
-              to propose improvements on current websites
-            </p>
+            {job.details}
           </div>
         </details>
+        {/*
         <details className="group flex-1">
           <summary className="cursor-pointer rounded-xl bg-gray-100 px-4 py-2">
             Company
@@ -100,7 +79,9 @@ export default function FullJobCell({
             </p>
           </div>
         </details>
+          */}
       </div>
+      {/* 
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Requirement</h2>
         <ul className="mt-4 space-y-2 text-sm text-gray-600">
@@ -135,7 +116,11 @@ export default function FullJobCell({
           <li>• Knowledge in HTML, CSS, JavaScript & WordPress builds</li>
         </ul>
       </div>
-      <button className="mt-8 w-full rounded-xl bg-primary py-4 text-white transition-all hover:bg-gray-600">
+      */}
+      <button
+        className="mt-8 w-full rounded-xl bg-primary py-4 text-white transition-all hover:bg-gray-600"
+        onClick={handleClick}
+      >
         Apply Now
       </button>
     </div>
