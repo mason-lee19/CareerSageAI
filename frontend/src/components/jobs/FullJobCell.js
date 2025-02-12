@@ -10,7 +10,7 @@ export default function FullJobCell({ job }) {
   };
 
   return (
-    <div className="min-h-screen bg-white p-8 m-8 rounded-3xl bg-white p-8">
+    <div className="h-auto bg-white p-8 m-8 rounded-3xl bg-white p-8 sticky top-4 mb-4">
       <header className="flex items-center justify-between">
         <img
           src="https://icons8.com/icon/G7wbX3gJW5c/hottypo"
@@ -40,6 +40,10 @@ export default function FullJobCell({ job }) {
         <div className="rounded-xl bg-purple-100 px-4 py-2">
           <p className="text-xs text-gray-500">Skill</p>
           <p className="font-semibold">{experience}</p>
+        </div>
+        <div className="rounded-xl bg-purple-100 px-4 py-2">
+          <p className="text-xs text-gray-500">Match</p>
+          <p className="font-semibold">{`${(job.score * 100).toFixed(1)}%`}</p>
         </div>
       </div>
       <div className="mt-8 flex gap-8">

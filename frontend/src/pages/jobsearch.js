@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { searchJobs } from "../api";
 
 import MiniJobCell from "../components/jobs/MiniJobCell";
@@ -7,18 +7,58 @@ import FullJobCell from "../components/jobs/FullJobCell";
 function JobSearch() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [limit, setLimit] = useState(10);
 
-  const handleSearch = async () => {
-    const data = await searchJobs(query);
-    setResults(data.results);
+  const handleSearch = async (newQuery=false) => {
+    if (isLoading) return;
+    setIsLoading(true);
+
+    try {
+      const currentPage = newQuery ? 1 : page;
+      const data = await searchJobs(query,currentPage,limit);
+      if (data && data.results) {
+        setResults(prevResults => 
+          newQuery ? data.results.map(job => ({ ...job.metadata, score: job.score })) 
+                   : [...prevResults, ...data.results.map(job => ({ ...job.metadata, score: job.score }))]
+        );
+        setHasMore(data.results.length > 0); // If no more results, stop loading
+        setPage(currentPage + 1);
+      }
+    } catch (error) {
+      console.error("Error fetching jobs: ",error)
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const newSearch = () => {
+    setResults([]);
+    setPage(1);
+    setHasMore(true);
+    handleSearch(true);
   };
 
   const handleJobClick = (job) => {
     setSelectedJob(job);
   };
 
-  console.log();
+  useEffect(() => {
+    if (!hasMore || isLoading || query==="") return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        handleSearch();
+      }
+    });
+
+    observer.observe(document.querySelector("#load-more-trigger"));
+
+    return () => observer.disconnect();
+  }, [hasMore, isLoading]);
 
   return (
     <div>
@@ -39,7 +79,7 @@ function JobSearch() {
             />
             <button
               className="py-3 px-6 rounded-md bg-primary text-white transition-all hover:bg-gray-600"
-              onClick={handleSearch}
+              onClick={newSearch}
             >
               Search
             </button>
@@ -79,12 +119,8 @@ function JobSearch() {
                 </div>
               ))}
             </div>
-            {/* Load More Button */}
-            <div className="px-8 flex justify-center">
-              <button className="px-32 py-3 rounded-md bg-primary py-4 text-white transition-all hover:bg-gray-600">
-                Load More
-              </button>
-            </div>
+            {/* Infinite Scroll Trigger*/}
+            {hasMore && <div id="load-more-trigger" className="px-8 flex justify-center"/>}
           </section>
           <div className="gap-6">
             {selectedJob && <FullJobCell job={selectedJob} />}
