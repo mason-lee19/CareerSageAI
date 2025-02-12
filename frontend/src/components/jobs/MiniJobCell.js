@@ -4,7 +4,6 @@ export default function MiniJobCell({ index, job }) {
   const contractType = "Full Time";
   const experience = "3-5 Years";
 
-  console.log(job);
   return (
     <div
       key={index}
@@ -47,10 +46,12 @@ export default function MiniJobCell({ index, job }) {
           <div className="w-[100px] bg-gray-300 rounded-full h-[8px] overflow-hidden">
             <div
               className="bg-primary-500 h-full"
-              style={{ width: `${(job.score * 100).toFixed(1)}%`}}
+              style={{ width: `${(job.score * 100).toFixed(1)}%` }}
             ></div>
           </div>
-          <span className="text-sm text-gray-600">{`${(job.score * 100).toFixed(1)}%`} Match</span>
+          <span className="text-sm text-gray-600">
+            {`${(job.score * 100).toFixed(1)}%`} Match
+          </span>
         </div>
         <span className="text-sm text-gray-500">{job.pullDate}</span>
       </div>
