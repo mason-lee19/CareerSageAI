@@ -36,6 +36,8 @@ cursor.execute(f"""
 
 rows = cursor.fetchall()
 
+conn.close()
+
 print(f"Rows Fetched : {len(rows)}")
 
 documents = [

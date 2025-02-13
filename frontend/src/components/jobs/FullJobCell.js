@@ -10,7 +10,7 @@ export default function FullJobCell({ job }) {
   };
 
   return (
-    <div className="h-auto bg-white p-8 m-8 rounded-3xl bg-white p-8 sticky top-4 mb-4">
+    <div className="max-h-[calc(100vh-40px)] overflow-y-auto bg-white p-8 m-8 rounded-3xl bg-white p-8 sticky top-4 mb-4">
       <header className="flex items-center justify-between">
         <img
           src="https://icons8.com/icon/G7wbX3gJW5c/hottypo"
