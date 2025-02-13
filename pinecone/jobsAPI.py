@@ -1,30 +1,17 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
-from langchain.vectorstores import FAISS
-from langchain.embeddings.base import Embeddings
-import ollama
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
+import json
 
-class OllamaEmbeddings(Embeddings):
-    def __init__(self,model="mxbai-embed-large"):
-        self.model=model
-
-    def embed_documents(self,texts):
-        return [self.embed_query(text) for text in texts]
-    
-    def embed_query(self,text:str):
-        if isinstance(text, np.ndarray):
-            text = str(text) 
-        response = ollama.embeddings(model=self.model,prompt=text.replace(u'\u00a0',u' '))
-        embedding = response["embedding"]
-
-        return np.array(embedding)
+from utils.embedding import OllamaEmbeddings
+from langchain.vectorstores import FAISS
 
 embeddings = OllamaEmbeddings()
 vector_db = FAISS.load_local("./data/vector_store",embeddings,allow_dangerous_deserialization=True)
+with open("./data/index_to_id.json","r") as f:
+    index_to_id = json.load(f)
 
 app = FastAPI()
 
@@ -45,32 +32,35 @@ async def search_job_api(request: JobQueryRequest,
                          page:int = 1,
                          limit:int = 10):
     """Search FAISS using a query and return results"""
-    query = request.query
-    query_embeddings = embeddings.embed_query(query)
-    
-    results = vector_db.similarity_search_by_vector(query_embeddings, request.k)
+    try:
+        query = request.query
+        query_embedding = embeddings.embed_query(query)
+        
+        #results = vector_db.similarity_search_by_vector(query_embedding, request.k)
+        distances, indices = vector_db.index.search(np.array([query_embedding]),request.k)
 
-    jobs = [job.metadata for job in results]
+        scores = 1 / (1 + distances[0])
+        scores = [round(float(score)*100,4) for score in scores]
 
-    scores = []
-    for job in results:
-        job_embeddings = embeddings.embed_query(job.page_content)
-        similarity_score = cosine_similarity([query_embeddings], [job_embeddings])[0][0]
-        scores.append(similarity_score)
+        doc_uuids = [index_to_id[str(index)] for index in indices[0]]
+        jobs = [vector_db.docstore._dict[uuid].metadata for uuid in doc_uuids]
 
-    start_index = (page-1) * limit
-    end_index = start_index + limit
+        start_index = (page-1) * limit
+        end_index = start_index + limit
 
-    paginated_jobs = jobs[start_index:end_index]
-    paginated_scores = scores[start_index:end_index]
-    
-    return {"page":page,
-            "limit":limit,
-            "total_results": len(jobs),
-            "results": [
-                {"metadata": job, "score": score} 
-                for job, score in zip(paginated_jobs, paginated_scores)
-            ]}
+        paginated_jobs = jobs[start_index:end_index]
+        paginated_scores = scores[start_index:end_index]
+        
+        return {"page":page,
+                "limit":limit,
+                "total_results": len(jobs),
+                "results": [
+                    {"metadata": job, "score": score} 
+                    for job, score in zip(paginated_jobs, paginated_scores)
+                ]}
+    except Exception as e:
+        print(f"An error occured: {e}")
+        raise HTTPException(status_code=500,detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1",port=8000)
