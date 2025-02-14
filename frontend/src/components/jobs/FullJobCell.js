@@ -85,42 +85,46 @@ export default function FullJobCell({ job }) {
         </details>
           */}
       </div>
-      {/* 
+
       <div className="mt-8">
-        <h2 className="text-lg font-semibold">Requirement</h2>
-        <ul className="mt-4 space-y-2 text-sm text-gray-600">
-          <li>
-            • Has a Bachelor's Degree (D3) in Web Design, Digital Media, or
-            related major
-          </li>
-          <li>
-            • Has more than 3 years of experience in building high-performing
-            websites
-          </li>
-          <li>
-            • Has strong portfolio that covers UI design that produces clean &
-            effective lead-gen web pages & a deep understanding of SEO
-            structures and responsive design
-          </li>
-          <li>
-            • Has a deep understanding of the importance of User-centered design
-            & design thinking
-          </li>
-          <li>
-            • An outstanding professional user (opt) goes through great design
-          </li>
-          <li>
-            • Able to meet aggressive deadlines in a fast-paced environment
-          </li>
-          <li>• Have a keen of aesthetics & attention to detail</li>
-          <li>
-            • Proficient in Figma, Illustrator, Photoshop, and other web
-            building tools
-          </li>
-          <li>• Knowledge in HTML, CSS, JavaScript & WordPress builds</li>
-        </ul>
+        <details className="group flex-1" open>
+          <summary className="cursor-pointer rounded-xl bg-gray-100 px-4 py-2">
+            Requirements
+          </summary>
+          <ul className="mt-4 space-y-2 text-sm text-gray-600">
+            <li>
+              • Has a Bachelor's Degree (D3) in Web Design, Digital Media, or
+              related major
+            </li>
+            <li>
+              • Has more than 3 years of experience in building high-performing
+              websites
+            </li>
+            <li>
+              • Has strong portfolio that covers UI design that produces clean &
+              effective lead-gen web pages & a deep understanding of SEO
+              structures and responsive design
+            </li>
+            <li>
+              • Has a deep understanding of the importance of User-centered
+              design & design thinking
+            </li>
+            <li>
+              • An outstanding professional user (opt) goes through great design
+            </li>
+            <li>
+              • Able to meet aggressive deadlines in a fast-paced environment
+            </li>
+            <li>• Have a keen of aesthetics & attention to detail</li>
+            <li>
+              • Proficient in Figma, Illustrator, Photoshop, and other web
+              building tools
+            </li>
+            <li>• Knowledge in HTML, CSS, JavaScript & WordPress builds</li>
+          </ul>
+        </details>
       </div>
-      */}
+
       <button
         className="mt-8 w-full rounded-xl bg-primary py-4 text-white transition-all hover:bg-gray-600"
         onClick={handleClick}
