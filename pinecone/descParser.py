@@ -17,9 +17,9 @@ def create_table(cursor,table_name):
         cursor.execute(f'''
             CREATE TABLE IF NOT EXISTS {table_name} (
                 job_key TEXT,
-                job_type TEXT,
+                employment_type TEXT,
                 is_remote BOOLEAN,
-                yrs_exp INTEGER,
+                yrs_exp TEXT,
                 job_desc TEXT,
                 requirements TEXT,
                 company_desc TEXT,
@@ -36,7 +36,7 @@ def insert_job_details(cursor,table_name,job_key,extracted_sections):
     cursor.execute(f'''
         INSERT INTO {table_name} (
             job_key,
-            job_type, 
+            employment_type, 
             is_remote, 
             yrs_exp, 
             job_desc, 
@@ -45,7 +45,7 @@ def insert_job_details(cursor,table_name,job_key,extracted_sections):
         ) VALUES (?, ?, ?, ?, ?, ?, ?)
     ''', (
         job_key,
-        extracted_sections.job_type,
+        extracted_sections.employment_type,
         extracted_sections.is_remote,
         extracted_sections.yrs_exp,
         extracted_sections.job_desc,
@@ -69,7 +69,7 @@ cursor.execute(f"""
 
 rows = cursor.fetchall()
 
-desc_table_name = "description_data"
+desc_table_name = "ai_desc_data_v3"
 
 create_table(cursor,desc_table_name)
 

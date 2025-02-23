@@ -4,9 +4,9 @@ import json
 import re
 
 class ExtractedSections(BaseModel):
-    job_type: str
+    employment_type: str
     is_remote: bool
-    yrs_exp: int
+    yrs_exp: str = None
     job_desc: str
     requirements: str
     company_desc: str = None
@@ -18,59 +18,54 @@ class JobDetailsExtractor:
 
     def extract(self) -> ExtractedSections:
         return ExtractedSections(
-            job_type=self._extract_job_type(),
+            employment_type=self._extract_employment_type(),
             is_remote=self._is_remote(),
-            yrs_exp=self._extract_max_years_experience(),
+            yrs_exp=self.job_data.get("experience",""),
             job_desc=self.job_data.get("job_description", ""),
             requirements=json.dumps(self.job_data.get("requirements", [])),
             company_desc=self.job_data.get("company_description", "")
         )
-
-    def _preprocess_text(self, text: str) -> str:
+    
+    def _preprocess_text(self,text: str) -> str:
         return re.sub(r'\s+', ' ', text).strip()
-
-    def _extract_job_type(self) -> str:
-        job_types = ["full[- ]?time", "part[- ]?time", "contract", "temporary", "internship", "freelance"]
+    
+    def _check_bool(self,value) -> bool:
+        return value if isinstance(value, bool) else 0
+    
+    def _extract_employment_type(self) -> str:
+        job_types = ["full[- ]?time", "part[- ]?time", "contract", "temporary", "freelance"]
         match = re.search("|".join(job_types), self.job_details, re.IGNORECASE)
-        return match.group(0).capitalize() if match else "Not specified"
-
+        return match.group(0).capitalize() if match else "Full-time"
+    
     def _is_remote(self) -> bool:
         remote_keywords = ["remote", "work from home", "telecommute", "virtual"]
         return bool(re.search("|".join(remote_keywords), self.job_details, re.IGNORECASE))
 
-    def _extract_max_years_experience(self) -> int:
-        patterns = [
-            r'(\d{1,2})\+?\s*(?:years|yrs)\s*of\s*experience',
-            r'(\d{1,2})-(\d{1,2})\s*(?:years|yrs)',
-            r'at least\s*(\d{1,2})\s*(?:years|yrs)'
-        ]
-        years = [int(y) for pattern in patterns for match in re.findall(pattern, self.job_details, re.IGNORECASE) 
-                 for y in (match if isinstance(match, tuple) else [match])]
-        return max(years) if years else None
-
     def _create_prompt(self) -> str:
         return f"""
-        You are a helpful assistant that extracts structured information from job postings. 
-        Below is a job posting from Indeed:
+            You are a helpful assistant that extracts structured information from job postings. Below is a job posting from Indeed:
 
-        {self.job_details}
+            {self.job_details}
 
-        Extract the following information in JSON format:
-        - "job_description": The full text of the job description, including all responsibilities and skills needed.
-        - "requirements": A list of job requirements exactly as listed.
-        - "company_description": The full text of the company description (if available).
+            Extract the following information in JSON format:
+            - "job_description": A reworded and slightly summarized version of the full job description. Include all responsibilities, required skills, and key tasks. If the job description is not clearly labeled, infer it from any relevant sections, such as role expectations, day-to-day activities, or skill requirements. Avoid leaving this field blank unless absolutely no relevant information is present. Avoid exact wording.
+            - "requirements": A rephrased list of job requirements, maintaining the meaning but avoiding exact wording.
+            - "experience": A string with the minimum years of experience required for this job, formatted as "3 Years" or "1 Year". Look for phrases like "at least X years," "minimum of X years," "X+ years," or any other wording that indicates the minimum experience needed. If the job posting does not mention years of experience, return an empty string.
+            - "company_description": A summarized and reworded version of the company description, if available.
 
-        Maintain the wording and details as presented. You can summarize lightly.
+            Maintain accuracy while avoiding direct copying of phrases from the original text. The rephrasing should provide the same essential information in a fresh and unique way.
 
-        Return the output in the following JSON format:
-        {{
-            "job_description": "...",
-            "requirements": ["...", "..."],
-            "company_description": "..."
-        }}
 
-        Do not return anything else but the data in JSON format.
-        """
+            Return the output in the following JSON format:
+            {{
+                "job_description": "...",
+                "requirements": ["...", "..."],
+                "experience": "...",
+                "company_description": "..."
+            }}
+
+            Do not return anything else but the data in JSON format.
+            """
 
     def _ask_ollama(self, prompt: str) -> str:
         model = OllamaLLM(model="llama3.2")
