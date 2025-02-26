@@ -69,7 +69,8 @@ cursor.execute(f"""
 
 rows = cursor.fetchall()
 
-desc_table_name = "ai_desc_data_v3"
+#desc_table_name = "ai_desc_data_v3"
+desc_table_name = "ai_desc_data_v4"
 
 create_table(cursor,desc_table_name)
 
@@ -87,9 +88,16 @@ for job in tqdm(rows,desc="Processing Job Postings"):
         continue
 
     extractor = JobDetailsExtractor(job_details)
-    extracted_sections = extractor.extract()
+    try:
+        extracted_sections = extractor.extract()
+        insert_job_details(cursor,desc_table_name,job_key,extracted_sections)
 
-    insert_job_details(cursor,desc_table_name,job_key,extracted_sections)
+    except Exception as e:
+        print(f"Failed to extract information from this job : {e}")
+        print(f"***********{job_key} Job Details**************")
+        print(job_details)
+
+    
 
 conn.close()
 

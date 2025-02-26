@@ -1,15 +1,24 @@
 from langchain_ollama import OllamaLLM
+from typing import Optional
 from pydantic import BaseModel
 import json
 import re
+import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+BASE_API_URL = os.getenv("LOCAL_OLLAMA_API_URL")
+API_URL = BASE_API_URL + "/api/generate"
 
 class ExtractedSections(BaseModel):
     employment_type: str
     is_remote: bool
-    yrs_exp: str = None
+    yrs_exp: Optional[str] = None
     job_desc: str
     requirements: str
-    company_desc: str = None
+    company_desc: Optional[str] = None
 
 class JobDetailsExtractor:
     def __init__(self,job_details):
@@ -23,7 +32,7 @@ class JobDetailsExtractor:
             yrs_exp=self.job_data.get("experience",""),
             job_desc=self.job_data.get("job_description", ""),
             requirements=json.dumps(self.job_data.get("requirements", [])),
-            company_desc=self.job_data.get("company_description", "")
+            company_desc=self.job_data.get("company_description", None)
         )
     
     def _preprocess_text(self,text: str) -> str:
@@ -50,11 +59,10 @@ class JobDetailsExtractor:
             Extract the following information in JSON format:
             - "job_description": A reworded and slightly summarized version of the full job description. Include all responsibilities, required skills, and key tasks. If the job description is not clearly labeled, infer it from any relevant sections, such as role expectations, day-to-day activities, or skill requirements. Avoid leaving this field blank unless absolutely no relevant information is present. Avoid exact wording.
             - "requirements": A rephrased list of job requirements, maintaining the meaning but avoiding exact wording.
-            - "experience": A string with the minimum years of experience required for this job, formatted as "3 Years" or "1 Year". Look for phrases like "at least X years," "minimum of X years," "X+ years," or any other wording that indicates the minimum experience needed. If the job posting does not mention years of experience, return an empty string.
+            - "experience": A string with the minimum years of experience required for this job, formatted like "3 Years" or "1 Year".
             - "company_description": A summarized and reworded version of the company description, if available.
 
             Maintain accuracy while avoiding direct copying of phrases from the original text. The rephrasing should provide the same essential information in a fresh and unique way.
-
 
             Return the output in the following JSON format:
             {{
@@ -68,8 +76,26 @@ class JobDetailsExtractor:
             """
 
     def _ask_ollama(self, prompt: str) -> str:
-        model = OllamaLLM(model="llama3.2")
-        return model.invoke(prompt)
+        #model = OllamaLLM(model="llama3.2")
+        #return model.invoke(prompt)
+        payload = {
+            "model":"llama3.2",
+            "prompt": prompt,
+            "stream": False,
+            "options" : {
+                "num_ctx": 4096,
+            },
+        }
+
+        response = requests.post(API_URL,json=payload)
+
+        if response.status_code != 200:
+            print(f"Error {response.status_code} : {response.text}")
+            return None
+        
+        response_data = response.json()
+        
+        return response_data['response']
 
     def _parse_llm_response(self, response: str) -> dict:
         try:
