@@ -1,8 +1,6 @@
 import React from "react";
 
 export default function MiniJobCell({ index, job }) {
-  const contractType = "Full Time";
-  const experience = "3-5 Years";
 
   return (
     <div
@@ -27,10 +25,10 @@ export default function MiniJobCell({ index, job }) {
 
       <div className="flex gap-3">
         <span className="px-3 py-1 bg-gray-200 rounded-full text-sm">
-          {contractType}
+          {job.employmentType}
         </span>
         <span className="px-3 py-1 bg-gray-200 rounded-full text-sm">
-          {experience}
+          {job.yrsExp}
         </span>
         <span className="px-3 py-1 bg-gray-200 rounded-full text-sm">
           {job.salary}
@@ -38,7 +36,7 @@ export default function MiniJobCell({ index, job }) {
       </div>
 
       <p className="text-sm text-gray-600">
-        Details : {job.details.substring(0, 200)}
+        Details : {job.jobDesc.substring(0, 200)}
       </p>
 
       <div className="flex justify-between items-center pt-2">

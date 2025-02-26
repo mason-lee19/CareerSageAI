@@ -23,15 +23,36 @@ def appendSalary(min_salary,max_salary):
 
     return f"${min_salary}-${max_salary}"
 
+def combinedDescReq(desc,req):
+    if not req and not desc:
+        return None
+    
+    if not req:
+        return desc
+    
+    for r in req:
+        desc += str(r)
+
+    return desc
+
+
 db_name = "./data/db.db"
-table_name = "job_data"
+job_table_name = "job_data"
+job_desc_name = "ai_desc_data_v4"
 
 conn = sqlite3.connect(db_name)
 cursor = conn.cursor()
 
+#cursor.execute(f"""
+#    SELECT jobLink,jobTitle,jobCompany,minSalary,maxSalary,jobDetails,jobLocation,pullDate
+#    FROM {table_name}
+#""")
 cursor.execute(f"""
-    SELECT jobLink,jobTitle,jobCompany,minSalary,maxSalary,jobDetails,jobLocation,pullDate
-    FROM {table_name}
+    SELECT j.jobLink, j.jobTitle, j.jobCompany, j.minSalary, j.maxSalary, j.jobLocation, j.pullDate, 
+                d.employment_type, d.is_remote, d.yrs_exp, d.job_desc, d.requirements, d.company_desc
+    FROM {job_table_name} AS j 
+    JOIN {job_desc_name} AS d 
+    ON j.jobKey = d.job_key
 """)
 
 rows = cursor.fetchall()
@@ -40,17 +61,24 @@ conn.close()
 
 print(f"Rows Fetched : {len(rows)}")
 
+
+
 documents = [
     Document(
-        page_content = job[5],
+        page_content = combinedDescReq(job[10],job[11]),
         metadata = {
             "url":job[0],
             "title":job[1],
             "company":job[2],
             "salary":appendSalary(job[3],job[4]),
-            "details":job[5],
-            "location":job[6],
-            "pullDate":job[7]}
+            "location":job[5],
+            "pullDate":job[6],
+            "employmentType":job[7],
+            "remoteStatus":job[8],
+            "yrsExp":job[9],
+            "jobDesc":job[10],
+            "req":job[11],
+            "compDesc":job[12]}
     )
     for job in rows
 ]
