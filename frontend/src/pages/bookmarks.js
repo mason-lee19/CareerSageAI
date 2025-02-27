@@ -81,7 +81,7 @@ export default function bookmarks() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-150">
+                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
                   <td className="px-6 py-4 text-gray-800">
                     Frontend Developer
                   </td>
@@ -93,13 +93,13 @@ export default function bookmarks() {
                   </td>
                   <td className="px-6 py-4 text-gray-800">2023-06-15</td>
                   <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors duration-150 hover:shadow-sm">
+                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-sm">
                       Update Status
                     </button>
                   </td>
                 </tr>
 
-                <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-150">
+                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
                   <td className="px-6 py-4 text-gray-800">UX Designer</td>
                   <td className="px-6 py-4 text-gray-800">DesignHub</td>
                   <td className="px-6 py-4">
@@ -109,13 +109,13 @@ export default function bookmarks() {
                   </td>
                   <td className="px-6 py-4 text-gray-800">2023-06-18</td>
                   <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors duration-150 hover:shadow-sm">
+                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-md">
                       Update Status
                     </button>
                   </td>
                 </tr>
 
-                <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-150">
+                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
                   <td className="px-6 py-4 text-gray-800">Data Analyst</td>
                   <td className="px-6 py-4 text-gray-800">DataWorks</td>
                   <td className="px-6 py-4">
@@ -125,13 +125,13 @@ export default function bookmarks() {
                   </td>
                   <td className="px-6 py-4 text-gray-800">2023-06-20</td>
                   <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors duration-150 hover:shadow-sm">
+                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-md">
                       Update Status
                     </button>
                   </td>
                 </tr>
 
-                <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-150">
+                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
                   <td className="px-6 py-4 text-gray-800">Product Manager</td>
                   <td className="px-6 py-4 text-gray-800">ProductPro</td>
                   <td className="px-6 py-4">
@@ -141,13 +141,13 @@ export default function bookmarks() {
                   </td>
                   <td className="px-6 py-4 text-gray-800">2023-06-22</td>
                   <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors duration-150 hover:shadow-sm">
+                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-md">
                       Update Status
                     </button>
                   </td>
                 </tr>
 
-                <tr className="hover:bg-gray-50 transition-colors duration-150">
+                <tr className="hover:bg-gray-100 transition-colors duration-150">
                   <td className="px-6 py-4 text-gray-800">Backend Engineer</td>
                   <td className="px-6 py-4 text-gray-800">ServerSolutions</td>
                   <td className="px-6 py-4">
@@ -157,7 +157,7 @@ export default function bookmarks() {
                   </td>
                   <td className="px-6 py-4 text-gray-800">2023-06-25</td>
                   <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-50 transition-colors duration-150 hover:shadow-sm">
+                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-sm">
                       Update Status
                     </button>
                   </td>
