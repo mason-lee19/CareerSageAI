@@ -40,11 +40,6 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/contact" className="hover:underline">
-              Contact
-            </Link>
-          </li>
-          <li>
             {!user && (
               <Link href="/auth/login" className="hover:underline">
                 Sign In
@@ -57,22 +52,68 @@ export default function Navbar() {
                   src={user.photoURL}
                 />
                 {isSettingsOpen && (
-                  <div className="absolute right-2 mt-8 gap-8 bg-white shadow-lg rounded-md z-20">
-                    <div className="p-4">
+                  <div className="absolute right-8 mt-2 gap-8 bg-white shadow-lg rounded-md z-20">
+                    <div className="p-2">
+                      <div className="flex mb-2 text-gray-800">My Account</div>
+                      <hr className="my-2 border-t border-gray-300" />
                       {/* Go To Settings */}
-                      <div className="flex justify-center mb-4">
+                      <div className="flex mb-2">
                         <Link
                           href="/settings"
-                          className="text-gray-800 px-4 hover:text-gray-100 transition-colors"
+                          className="text-gray-800 hover:text-gray-100 transition-colors"
+                        >
+                          Profile
+                        </Link>
+                      </div>
+                      <div className="flex mb-2">
+                        <Link
+                          href="/settings"
+                          className="text-gray-800 hover:text-gray-100 transition-colors"
+                        >
+                          Billing
+                        </Link>
+                      </div>
+                      <div className="flex mb-2">
+                        <Link
+                          href="/settings"
+                          className="text-gray-800 hover:text-gray-100 transition-colors"
                         >
                           Settings
                         </Link>
                       </div>
                       <hr className="my-2 border-t border-gray-300" />
+                      {/* Go To Bookmarked Jobs */}
+                      <div className="flex mb-2 mr-10">
+                        <Link
+                          href="/bookmarks"
+                          className="text-gray-800 hover:text-gray-100 transition-colors"
+                        >
+                          Bookmarked Jobs
+                        </Link>
+                      </div>
+                      <div className="flex mb-2 mr-10">
+                        <Link
+                          href="/bookmarks"
+                          className="text-gray-800 hover:text-gray-100 transition-colors"
+                        >
+                          Analytics Dashboard
+                        </Link>
+                      </div>
+                      <hr className="my-2 border-t border-gray-300" />
+                      {/* Contact Page */}
+                      <div className="flex mb-2">
+                        <Link
+                          href="/contact"
+                          className="text-gray-800 hover:text-gray-100 transition-colors"
+                        >
+                          Contact
+                        </Link>
+                      </div>
+                      <hr className="my-2 border-t border-gray-300" />
                       {/* Log Off */}
-                      <div className="flex justify-center">
+                      <div className="flex">
                         <button
-                          className="text-gray-800 px-4 hover:text-gray-100 transition-colors"
+                          className="text-gray-800 hover:text-gray-100 transition-colors"
                           onClick={handleSignOut}
                         >
                           Sign Out
