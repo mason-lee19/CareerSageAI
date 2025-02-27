@@ -53,19 +53,29 @@ export default function Navbar() {
                 />
                 {isSettingsOpen && (
                   <div className="absolute right-8 mt-2 gap-8 bg-white shadow-lg rounded-md z-20">
-                    <div className="p-2">
+                    <link
+                      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+                      rel="stylesheet"
+                    />
+                    <div className="p-2 text-sm">
                       <div className="flex mb-2 text-gray-800">My Account</div>
                       <hr className="my-2 border-t border-gray-300" />
                       {/* Go To Settings */}
                       <div className="flex mb-2">
+                        <span className="material-symbols-outlined text-gray-800 mr-2">
+                          person
+                        </span>
                         <Link
                           href="/settings"
-                          className="text-gray-800 hover:text-gray-100 transition-colors"
+                          className="text-gray-800 hover:text-gray-100 transition-colors mr-28"
                         >
                           Profile
                         </Link>
                       </div>
                       <div className="flex mb-2">
+                        <span className="material-symbols-outlined text-gray-800 mr-2">
+                          credit_card
+                        </span>
                         <Link
                           href="/settings"
                           className="text-gray-800 hover:text-gray-100 transition-colors"
@@ -74,6 +84,9 @@ export default function Navbar() {
                         </Link>
                       </div>
                       <div className="flex mb-2">
+                        <span className="material-symbols-outlined text-gray-800 mr-2">
+                          settings
+                        </span>
                         <Link
                           href="/settings"
                           className="text-gray-800 hover:text-gray-100 transition-colors"
@@ -83,7 +96,10 @@ export default function Navbar() {
                       </div>
                       <hr className="my-2 border-t border-gray-300" />
                       {/* Go To Bookmarked Jobs */}
-                      <div className="flex mb-2 mr-10">
+                      <div className="flex mb-2">
+                        <span className="material-symbols-outlined text-gray-800 mr-2">
+                          bookmark
+                        </span>
                         <Link
                           href="/bookmarks"
                           className="text-gray-800 hover:text-gray-100 transition-colors"
@@ -91,7 +107,10 @@ export default function Navbar() {
                           Bookmarked Jobs
                         </Link>
                       </div>
-                      <div className="flex mb-2 mr-10">
+                      <div className="flex mb-2">
+                        <span className="material-symbols-outlined text-gray-800 mr-2">
+                          dashboard
+                        </span>
                         <Link
                           href="/bookmarks"
                           className="text-gray-800 hover:text-gray-100 transition-colors"
@@ -102,6 +121,9 @@ export default function Navbar() {
                       <hr className="my-2 border-t border-gray-300" />
                       {/* Contact Page */}
                       <div className="flex mb-2">
+                        <span className="material-symbols-outlined text-gray-800 mr-2">
+                          email
+                        </span>
                         <Link
                           href="/contact"
                           className="text-gray-800 hover:text-gray-100 transition-colors"
@@ -112,11 +134,14 @@ export default function Navbar() {
                       <hr className="my-2 border-t border-gray-300" />
                       {/* Log Off */}
                       <div className="flex">
+                        <span className="material-symbols-outlined text-gray-800 mr-2">
+                          logout
+                        </span>
                         <button
                           className="text-gray-800 hover:text-gray-100 transition-colors"
                           onClick={handleSignOut}
                         >
-                          Sign Out
+                          Logout
                         </button>
                       </div>
                     </div>
