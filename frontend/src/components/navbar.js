@@ -63,33 +63,11 @@ export default function Navbar() {
                       {/* Go To Settings */}
                       <div className="flex mb-2">
                         <span className="material-symbols-outlined text-gray-800 mr-2">
-                          person
-                        </span>
-                        <Link
-                          href="/settings"
-                          className="text-gray-800 hover:text-gray-100 transition-colors mr-28"
-                        >
-                          Profile
-                        </Link>
-                      </div>
-                      <div className="flex mb-2">
-                        <span className="material-symbols-outlined text-gray-800 mr-2">
-                          credit_card
-                        </span>
-                        <Link
-                          href="/settings"
-                          className="text-gray-800 hover:text-gray-100 transition-colors"
-                        >
-                          Billing
-                        </Link>
-                      </div>
-                      <div className="flex mb-2">
-                        <span className="material-symbols-outlined text-gray-800 mr-2">
                           settings
                         </span>
                         <Link
                           href="/settings"
-                          className="text-gray-800 hover:text-gray-100 transition-colors"
+                          className="text-gray-800 hover:text-gray-100 transition-colors mr-28"
                         >
                           Settings
                         </Link>
@@ -109,7 +87,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex mb-2">
                         <span className="material-symbols-outlined text-gray-800 mr-2">
-                          dashboard
+                          analytics
                         </span>
                         <Link
                           href="/bookmarks"
@@ -122,7 +100,7 @@ export default function Navbar() {
                       {/* Contact Page */}
                       <div className="flex mb-2">
                         <span className="material-symbols-outlined text-gray-800 mr-2">
-                          email
+                          mail
                         </span>
                         <Link
                           href="/contact"
