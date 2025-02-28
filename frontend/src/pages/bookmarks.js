@@ -1,6 +1,16 @@
 import React from "react";
+import JobTableEntry from "../components/jobs/JobTableEntry";
 
 export default function bookmarks() {
+  // Filler code for time being
+  class JobBookmark {
+    constructor(jobTitle, company, status, date) {
+      this.jobTitle = jobTitle;
+      this.company = company;
+      this.status = status;
+      this.date = date;
+    }
+  }
   return (
     <div className="w-full h-[calc(100vh-12rem)] flex border-b border-gray-200">
       <link
@@ -81,87 +91,72 @@ export default function bookmarks() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
-                  <td className="px-6 py-4 text-gray-800">
-                    Frontend Developer
-                  </td>
-                  <td className="px-6 py-4 text-gray-800">TechCorp</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
-                      Bookmarked
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-gray-800">2023-06-15</td>
-                  <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-sm">
-                      Update Status
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
-                  <td className="px-6 py-4 text-gray-800">UX Designer</td>
-                  <td className="px-6 py-4 text-gray-800">DesignHub</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
-                      Interview Scheduled
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-gray-800">2023-06-18</td>
-                  <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-md">
-                      Update Status
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
-                  <td className="px-6 py-4 text-gray-800">Data Analyst</td>
-                  <td className="px-6 py-4 text-gray-800">DataWorks</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium">
-                      Applied
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-gray-800">2023-06-20</td>
-                  <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-md">
-                      Update Status
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-150">
-                  <td className="px-6 py-4 text-gray-800">Product Manager</td>
-                  <td className="px-6 py-4 text-gray-800">ProductPro</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
-                      Bookmarked
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-gray-800">2023-06-22</td>
-                  <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-md">
-                      Update Status
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className="hover:bg-gray-100 transition-colors duration-150">
-                  <td className="px-6 py-4 text-gray-800">Backend Engineer</td>
-                  <td className="px-6 py-4 text-gray-800">ServerSolutions</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">
-                      Interview Completed
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-gray-800">2023-06-25</td>
-                  <td className="px-6 py-4">
-                    <button className="px-3 py-1 bg-white border border-gray-300 rounded-md text-sm hover:bg-gray-200 transition-colors duration-150 hover:shadow-sm">
-                      Update Status
-                    </button>
-                  </td>
-                </tr>
+                <JobTableEntry
+                  key={0}
+                  jobBookmark={
+                    new JobBookmark(
+                      "Data Scientist",
+                      "CareerSage",
+                      "Offer",
+                      "2025-02-27"
+                    )
+                  }
+                />
+                <JobTableEntry
+                  key={0}
+                  jobBookmark={
+                    new JobBookmark(
+                      "Data Engineer",
+                      "Western Digital",
+                      "Applied",
+                      "2025-02-25"
+                    )
+                  }
+                />
+                <JobTableEntry
+                  key={1}
+                  jobBookmark={
+                    new JobBookmark(
+                      "UX Designer",
+                      "Design Hub",
+                      "Interview Scheduled",
+                      "2025-02-25"
+                    )
+                  }
+                />
+                <JobTableEntry
+                  key={1}
+                  jobBookmark={
+                    new JobBookmark(
+                      "UX Designer",
+                      "Design Hub",
+                      "Interview Completed",
+                      "2025-02-25"
+                    )
+                  }
+                />
+                <JobTableEntry
+                  key={2}
+                  jobBookmark={
+                    new JobBookmark(
+                      "Data Analyst",
+                      "Data Works",
+                      "Bookmarked",
+                      "2025-02-24"
+                    )
+                  }
+                />
+                <JobTableEntry
+                  key={3}
+                  jobBookmark={
+                    new JobBookmark(
+                      "Product Manager",
+                      "ProductPro",
+                      "Declined",
+                      "2025-02-24"
+                    )
+                  }
+                />
               </tbody>
             </table>
           </div>
