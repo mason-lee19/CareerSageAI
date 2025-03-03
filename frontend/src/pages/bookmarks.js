@@ -1,16 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import JobTableEntry from "../components/jobs/JobTableEntry";
+import UpdatePopup from "../components/jobs/UpdatePopup";
 
 export default function bookmarks() {
   // Filler code for time being
   class JobBookmark {
-    constructor(jobTitle, company, status, date) {
+    constructor(jobTitle, company, status, notes, date) {
       this.jobTitle = jobTitle;
       this.company = company;
       this.status = status;
+      this.notes = notes;
       this.date = date;
     }
   }
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [jobs, setJobs] = useState([
+    new JobBookmark(
+      "Data Scientist",
+      "CareerSage",
+      "Offer",
+      "Asked questions about linked lists.",
+      "2025-02-27"
+    ),
+    new JobBookmark(
+      "Backend Engineer",
+      "TechFlow",
+      "Applied",
+      "Waiting for recruiter response.",
+      "2025-02-20"
+    ),
+    new JobBookmark(
+      "Machine Learning Engineer",
+      "DeepAI",
+      "Interview",
+      "Had a great discussion on transformers.",
+      "2025-02-22"
+    ),
+  ]);
+
+  const handleOpenPopup = (job) => {
+    setSelectedJob(job);
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedJob(null);
+  };
+
+  const handleUpdateJob = (updatedJob) => {
+    setJobs((prevJobs) =>
+      prevJobs.map((job) =>
+        job.jobTitle === updatedJob.jobTitle ? updatedJob : job
+      )
+    );
+    handleClosePopup();
+  };
+
   return (
     <div className="w-full h-[calc(100vh-12rem)] flex border-b border-gray-200">
       <link
@@ -85,80 +133,29 @@ export default function bookmarks() {
                     Status
                   </th>
                   <th className="px-6 py-3 font-medium text-gray-600">Date</th>
+                  <th className="px-6 py-3 font-medium text-gray-600">Notes</th>
                   <th className="px-6 py-3 font-medium text-gray-600">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <JobTableEntry
-                  key={0}
-                  jobBookmark={
-                    new JobBookmark(
-                      "Data Scientist",
-                      "CareerSage",
-                      "Offer",
-                      "2025-02-27"
-                    )
-                  }
-                />
-                <JobTableEntry
-                  key={0}
-                  jobBookmark={
-                    new JobBookmark(
-                      "Data Engineer",
-                      "Western Digital",
-                      "Applied",
-                      "2025-02-25"
-                    )
-                  }
-                />
-                <JobTableEntry
-                  key={1}
-                  jobBookmark={
-                    new JobBookmark(
-                      "UX Designer",
-                      "Design Hub",
-                      "Interview Scheduled",
-                      "2025-02-25"
-                    )
-                  }
-                />
-                <JobTableEntry
-                  key={1}
-                  jobBookmark={
-                    new JobBookmark(
-                      "UX Designer",
-                      "Design Hub",
-                      "Interview Completed",
-                      "2025-02-25"
-                    )
-                  }
-                />
-                <JobTableEntry
-                  key={2}
-                  jobBookmark={
-                    new JobBookmark(
-                      "Data Analyst",
-                      "Data Works",
-                      "Bookmarked",
-                      "2025-02-24"
-                    )
-                  }
-                />
-                <JobTableEntry
-                  key={3}
-                  jobBookmark={
-                    new JobBookmark(
-                      "Product Manager",
-                      "ProductPro",
-                      "Declined",
-                      "2025-02-24"
-                    )
-                  }
-                />
+                {jobs.map((job, index) => (
+                  <JobTableEntry
+                    key={index}
+                    jobBookmark={job}
+                    onOpenPopup={handleOpenPopup}
+                  />
+                ))}
               </tbody>
             </table>
+            {isPopupOpen && selectedJob && (
+              <UpdatePopup
+                job={selectedJob}
+                onClose={handleClosePopup}
+                onUpdate={handleUpdateJob}
+              />
+            )}
           </div>
         </div>
       </div>
