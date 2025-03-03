@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 
 export default function UpdatePopup({ job, onClose, onUpdate }) {
-  const [status, setStatus] = useState(job.status);
-  const [notes, setNotes] = useState(job.notes);
+  const [formData, setFormData] = useState({
+    status: job.status,
+    notes: job.notes,
+  });
+
+  // Handles changes for both status and notes
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value, // Dynamically updates the correct field (status or notes)
+    }));
+  };
 
   const handleUpdate = () => {
-    onUpdate({ ...job, status, notes });
-    onClose();
+    onUpdate({ ...job, ...formData });
   };
 
   return (
@@ -32,6 +42,8 @@ export default function UpdatePopup({ job, onClose, onUpdate }) {
             <div className="relative">
               <select
                 id="status"
+                value={formData.status}
+                onChange={handleChange}
                 className="block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none"
               >
                 <option>Bookmarked</option>
@@ -58,8 +70,8 @@ export default function UpdatePopup({ job, onClose, onUpdate }) {
             </label>
             <textarea
               id="notes"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              value={formData.notes}
+              onChange={handleChange}
               placeholder="Add any additional notes here"
               className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
               rows="3"
