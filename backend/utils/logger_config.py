@@ -31,7 +31,7 @@ logger.addHandler(handler)
 logger.propagate = False
 
 
-def log_and_print(message,log_level='info'):
+def log_and_print(message, log_level="info"):
     """
     Method to log and print messages for better consistency.
     """
