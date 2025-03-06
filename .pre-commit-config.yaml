@@ -6,3 +6,14 @@ repos:
         files: \.py$
       - id: ruff-format
         files: \.py$
+
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.3.1 # Replace with the latest version
+    hooks:
+      - id: autoflake
+        name: autoflake
+        entry: autoflake
+        language: python
+        types: [python]
+        args:
+          [--in-place, --remove-all-unused-imports, --remove-unused-variables]
