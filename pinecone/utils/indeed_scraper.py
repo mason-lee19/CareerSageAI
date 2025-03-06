@@ -295,7 +295,7 @@ class IndeedScraper:
                 return True
             return False
         else:
-            logger.error(f'Unable to retrieve individual job url')
+            logger.error('Unable to retrieve individual job url')
             return False
 
     @staticmethod

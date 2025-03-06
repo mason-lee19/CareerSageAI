@@ -1,9 +1,6 @@
 from zenrows import ZenRowsClient
 import os
 
-INTEL_DRIVER_PATH = './utils/chromedriverX64'
-MAC_DRIVER_PATH = './utils/chromedriverArm64'
-
 class SearchAPI():
     def __init__(self):
         """Initialize the SearchAPI class and create a curl_cffi session."""      

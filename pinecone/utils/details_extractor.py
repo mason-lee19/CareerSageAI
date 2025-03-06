@@ -1,4 +1,3 @@
-from langchain_ollama import OllamaLLM
 from typing import Optional
 from pydantic import BaseModel
 import json

@@ -1,6 +1,7 @@
 """Used for development, vectorizer will take sql db data and convert it into a local vectorized database for API use
 """
 import sqlite3
+import json
 import ollama
 from langchain.docstore.document import Document
 from langchain.embeddings.base import Embeddings
@@ -61,8 +62,6 @@ conn.close()
 
 print(f"Rows Fetched : {len(rows)}")
 
-
-
 documents = [
     Document(
         page_content = combinedDescReq(job[10],job[11]),
@@ -83,18 +82,17 @@ documents = [
     for job in rows
 ]
 
-print(f"Embedding documents")
+print("Embedding documents")
 
 embeddings = OllamaEmbeddings()
 vector_db = FAISS.from_documents(documents,embeddings)
 vector_db.save_local("./data/vector_store")
 
 
-print(f"Creating index_to_id.json")
+print("Creating index_to_id.json")
 
 index_to_id = {idx:uuid for idx, uuid in enumerate(vector_db.docstore._dict.keys())}
 
-import json
 with open("./data/index_to_id.json","w") as f:
     json.dump(index_to_id,f)
 

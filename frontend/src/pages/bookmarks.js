@@ -14,8 +14,6 @@ export default function bookmarks() {
     }
   }
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedJob, setSelectedJob] = useState(null);
   const [jobs, setJobs] = useState([
     new JobBookmark(
       "Data Scientist",
@@ -39,6 +37,9 @@ export default function bookmarks() {
       "2025-02-22"
     ),
   ]);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
 
   const handleOpenPopup = (job) => {
     setSelectedJob(job);
